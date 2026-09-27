@@ -100,3 +100,176 @@ Ao terminar:
 8. Não faça alterações fora do escopo solicitado.
 
 No final, explique de forma breve quais arquivos foram alterados e o que foi modificado em cada um.
+
+
+
+PROMPT 2 
+Quero adicionar uma nova seção ao meu portfólio UGC, chamada **"Material de trabalho"**.
+
+Antes de alterar qualquer coisa, analise os arquivos atuais do projeto, principalmente:
+
+* `index.html`
+* `style.css`
+* `script.js`
+
+### OBJETIVO
+
+Adicionar a nova seção **"Material de trabalho" logo depois das seções de "Vídeos" e "Fotos" do portfólio**.
+
+A nova seção deve apresentar três equipamentos utilizados na produção de conteúdo:
+
+1. Ring Light
+2. Softbox
+3. Tripé
+
+As fotos reais desses equipamentos serão adicionadas posteriormente ao projeto.
+
+### IMPORTANTE — NÃO ALTERAR O LAYOUT EXISTENTE
+
+Não quero redesign do site.
+
+Mantenha exatamente a identidade visual, tipografia, espaçamentos, proporções, responsividade e estrutura visual que já existem.
+
+Não altere:
+
+* Header
+* Hero
+* Sobre
+* seção de Vídeos
+* seção de Fotos
+* Serviços
+* Resultados
+* Marcas
+* Depoimentos
+* Processo
+* FAQ
+* Contato
+* Footer
+* filtros existentes
+* cards existentes
+* modal de vídeos
+* modal de fotos
+
+Apenas crie a nova seção e o código necessário para ela funcionar.
+
+### ESTRUTURA DA NOVA SEÇÃO
+
+Crie uma seção semelhante visualmente às demais seções do portfólio, mantendo o mesmo padrão de títulos e espaçamento.
+
+Título da seção:
+
+"Material de trabalho"
+
+Texto introdutório:
+
+"Equipamentos que fazem parte da minha rotina de produção e ajudam a criar conteúdos com qualidade, consistência e profissionalismo."
+
+Depois, criar três cards:
+
+**Ring Light**
+
+* Nome: Ring Light
+* Descrição curta: "Iluminação frontal para vídeos e fotos com acabamento mais uniforme."
+
+**Softbox**
+
+* Nome: Softbox
+* Descrição curta: "Iluminação suave para criar uma luz mais equilibrada e profissional."
+
+**Tripé**
+
+* Nome: Tripé
+* Descrição curta: "Estabilidade e praticidade para gravações e fotografias."
+
+### FOTOS
+
+Prepare a estrutura para utilizar posteriormente estas imagens:
+
+* `imagens/ring-light.jpg`
+* `imagens/softbox.jpg`
+* `imagens/tripe.jpg`
+
+Não invente imagens e não utilize imagens externas.
+
+Se esses arquivos ainda não existirem, deixe os caminhos preparados no código para que eu possa simplesmente colocar as imagens posteriormente na pasta `imagens`.
+
+### INTERAÇÃO
+
+Quero que os cards tenham uma interação semelhante à experiência visual já utilizada no portfólio.
+
+Ao clicar em um equipamento, abrir um modal profissional exibindo **somente a fotografia do equipamento**, sem texto, título ou descrição dentro do modal.
+
+O modal deve:
+
+* apresentar a imagem em tamanho grande;
+* manter a proporção original;
+* não cortar a imagem;
+* não deformar a imagem;
+* centralizar a fotografia;
+* funcionar bem em desktop e celular;
+* possuir botão X para fechar;
+* fechar também ao pressionar ESC;
+* opcionalmente fechar ao clicar no backdrop;
+* não alterar os outros modais existentes.
+
+### JAVASCRIPT
+
+Se for necessário utilizar JavaScript, siga a arquitetura e o padrão já utilizado no `script.js`.
+
+Não reescreva funções existentes sem necessidade.
+
+Prefira adicionar uma estrutura específica para `Material de trabalho`, mantendo o código organizado e separado da lógica dos vídeos e fotos.
+
+### CSS
+
+Adicione apenas as classes necessárias para a nova seção.
+
+Reutilize variáveis, fontes, espaçamentos, bordas, sombras e demais elementos visuais já existentes no `style.css` sempre que possível.
+
+Não crie uma identidade visual diferente para essa seção.
+
+### RESPONSIVIDADE
+
+A seção deve funcionar corretamente em:
+
+* desktop;
+* notebook;
+* tablet;
+* celular.
+
+Os três cards devem se reorganizar de maneira natural conforme a largura da tela.
+
+### IMPORTANTE SOBRE OS ARQUIVOS
+
+Não crie arquivos desnecessários.
+
+Não altere conteúdo que não tenha relação com essa nova funcionalidade.
+
+Não remova funcionalidades existentes.
+
+Não modifique o layout geral do portfólio.
+
+### ANTES DE FINALIZAR
+
+Verifique:
+
+1. A seção aparece depois de Vídeos e Fotos.
+2. Os três equipamentos aparecem corretamente.
+3. Os caminhos das imagens estão preparados.
+4. O clique em cada card abre o modal.
+5. O modal mostra somente a fotografia.
+6. A imagem não fica cortada ou deformada.
+7. O X fecha o modal.
+8. ESC fecha o modal.
+9. O modal não interfere no modal de vídeos.
+10. O modal não interfere no modal de fotos.
+11. A seção funciona corretamente no celular.
+12. Nenhuma outra seção do site foi alterada desnecessariamente.
+
+No final, me informe:
+
+* quais arquivos foram alterados;
+* o que foi adicionado em cada arquivo;
+* se alguma decisão precisou ser tomada por causa da estrutura atual do projeto.
+
+Não faça alterações adicionais fora desse escopo.
