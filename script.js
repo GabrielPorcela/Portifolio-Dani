@@ -14,75 +14,293 @@ document.addEventListener('DOMContentLoaded', () => {
   const portfolioItems = [
     {
       id: 1,
-      title: 'Treino de pernas patrocinado',
-      category: 'educacao-fisica',
-      categoryLabel: 'Educação Física',
+      title: 'Tênis',
+      category: 'moda',
+      categoryLabel: 'Moda',
       platform: 'Instagram Reels',
       tone: 'ph-tone-1',
-      embedUrl: '' // preencher com o link do Reels/TikTok/YouTube
+      video: 'videos/video16.mp4',
+      description: 'Vídeo de campanha.'
     },
     {
       id: 2,
-      title: 'Review de whey protein',
+      title: 'Rímel The Colossal',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok',
+      tone: 'ph-tone-2',
+      video: 'videos/video6.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 3,
+      title: 'Camiseta Use e Poder',
+      category: 'moda',
+      categoryLabel: 'Moda',
+      platform: 'Instagram Reels',
+      tone: 'ph-tone-3',
+      video: 'videos/video20.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 4,
+      title: 'Brincos',
+      category: 'acessorios',
+      categoryLabel: 'Acessórios',
+      platform: 'YouTube Shorts',
+      tone: 'ph-tone-1',
+      video: 'videos/video4.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 5,
+      title: 'Suplemento',
       category: 'educacao-fisica',
       categoryLabel: 'Educação Física',
       platform: 'TikTok',
       tone: 'ph-tone-2',
-      embedUrl: ''
-    },
-    {
-      id: 3,
-      title: 'Rotina de skincare noturna',
-      category: 'beleza',
-      categoryLabel: 'Beleza',
-      platform: 'Instagram Reels',
-      tone: 'ph-tone-3',
-      embedUrl: ''
-    },
-    {
-      id: 4,
-      title: 'Resenha de sérum vitamina C',
-      category: 'beleza',
-      categoryLabel: 'Beleza',
-      platform: 'YouTube Shorts',
-      tone: 'ph-tone-1',
-      embedUrl: ''
-    },
-    {
-      id: 5,
-      title: 'Try-on haul verão',
-      category: 'moda',
-      categoryLabel: 'Moda',
-      platform: 'TikTok',
-      tone: 'ph-tone-2',
-      embedUrl: ''
+      video: 'videos/video5.mp4',
+      description: 'Vídeo de campanha.'
     },
     {
       id: 6,
-      title: 'Lookbook lançamento de coleção',
-      category: 'moda',
-      categoryLabel: 'Moda',
+      title: 'Perfume Natura',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
       platform: 'Instagram Reels',
       tone: 'ph-tone-3',
-      embedUrl: ''
+      video: 'videos/video2.mp4',
+      description: 'Vídeo de campanha.'
     },
     {
       id: 7,
-      title: 'Criativo de anúncio — suplemento',
-      category: 'ads',
-      categoryLabel: 'Anúncio',
+      title: 'Calçados',
+      category: 'moda',
+      categoryLabel: 'Moda',
       platform: 'Meta Ads',
       tone: 'ph-tone-1',
-      embedUrl: ''
+      video: 'videos/video7.mp4',
+      description: 'Vídeo de campanha.'
     },
     {
       id: 8,
-      title: 'Criativo de anúncio — skincare',
+      title: 'Calçados',
+      category: 'moda',
+      categoryLabel: 'Moda',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video3.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 9,
+      title: 'Roupas',
+      category: 'moda',
+      categoryLabel: 'Moda',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video9.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 10,
+      title: 'Protetor solar',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video10.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 11,
+      title: 'Brincos',
+      category: 'acessorios',
+      categoryLabel: 'Acessórios',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video11.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 12,
+      title: 'Editável',
       category: 'ads',
       categoryLabel: 'Anúncio',
       platform: 'TikTok Ads',
       tone: 'ph-tone-2',
-      embedUrl: ''
+      video: 'videos/video12.mp',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 13,
+      title: 'Creme de Limpeza',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video13.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 14,
+      title: 'Camiseta',
+      category: 'moda',
+      categoryLabel: 'Moda',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video14.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 15,
+      title: 'Tênis',
+      category: 'moda',
+      categoryLabel: 'Moda',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video15.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 16,
+      title: 'Brincos',
+      category: 'acessorios',
+      categoryLabel: 'Acessórios',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video1.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 17,
+      title: 'Camisetas Blessed Choice',
+      category: 'moda',
+      categoryLabel: 'Moda',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video17.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 18,
+      title: 'Auto-cuidado',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video18.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 19,
+      title: 'Corrida',
+      category: 'educacao-fisica',
+      categoryLabel: 'Educação-Física',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video19.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 20,
+      title: 'Editável',
+      category: 'ads',
+      categoryLabel: 'Anúncio',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video8.mp',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 21,
+      title: 'Creme Elseve',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video21.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 22,
+      title: 'Hialurônico Toque Seco',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video22.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 23,
+      title: 'Pipoca Negresco',
+      category: 'gastronomia',
+      categoryLabel: 'Gastronomia',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video23.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 24,
+      title: 'Colorama Retrô',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video24.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 25,
+      title: 'Rosa Paulina',
+      category: 'moda',
+      categoryLabel: 'Moda',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video25.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 26,
+      title: 'Eudora',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video27.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 27,
+      title: 'CeraVe',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video28.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 28,
+      title: 'Vlog evento LIVE',
+      category: 'educacao-fisica',
+      categoryLabel: 'Educação-Física',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video29.mp4',
+      description: 'Vídeo de campanha.'
+    },
+    {
+      id: 29,
+      title: 'Body Splash Salon Line',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
+      platform: 'TikTok Ads',
+      tone: 'ph-tone-2',
+      video: 'videos/video26.mp4',
+      description: 'Vídeo de campanha.'
     }
   ];
 
@@ -92,29 +310,47 @@ document.addEventListener('DOMContentLoaded', () => {
   const portfolioGrid = document.getElementById('portfolioGrid');
 
   function renderPortfolio(items) {
-    portfolioGrid.innerHTML = items.map(item => `
-      <article class="portfolio-card reveal is-visible" data-category="${item.category}" data-id="${item.id}" tabindex="0" role="button" aria-label="Assistir: ${item.title}">
-        <div class="ph ${item.tone}" data-ph="${item.category}"></div>
-        <span class="portfolio-card-play">▶</span>
-        <div class="portfolio-card-body">
-          <span class="portfolio-card-category">${item.categoryLabel}</span>
-          <h3 class="portfolio-card-title">${item.title}</h3>
-          <span class="portfolio-card-watch">Assistir ▶</span>
-        </div>
-      </article>
-    `).join('');
+  portfolioGrid.innerHTML = items.map(item => `
+    <article
+      class="portfolio-card reveal is-visible"
+      data-category="${item.category}"
+      data-id="${item.id}"
+      tabindex="0"
+      role="button"
+      aria-label="Assistir: ${item.title}">
 
-    // liga o clique de cada card ao modal
-    portfolioGrid.querySelectorAll('.portfolio-card').forEach(card => {
-      card.addEventListener('click', () => openVideoModal(card.dataset.id));
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openVideoModal(card.dataset.id);
-        }
-      });
+      <div class="portfolio-card-media">
+        <video
+          class="portfolio-card-video"
+          src="${item.video}"
+          muted
+          playsinline
+          preload="metadata">
+        </video>
+
+        <span class="portfolio-card-play">▶</span>
+      </div>
+
+      <div class="portfolio-card-body">
+        <span class="portfolio-card-category">${item.categoryLabel}</span>
+        <h3 class="portfolio-card-title">${item.title}</h3>
+        <span class="portfolio-card-watch">Assistir ▶</span>
+      </div>
+
+    </article>
+  `).join('');
+
+  portfolioGrid.querySelectorAll('.portfolio-card').forEach(card => {
+    card.addEventListener('click', () => openVideoModal(card.dataset.id));
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openVideoModal(card.dataset.id);
+      }
     });
-  }
+  });
+}
 
   renderPortfolio(portfolioItems);
 
@@ -187,104 +423,112 @@ function openVideoModal(id) {
   const photoItems = [
     {
       id: 1,
-      title: 'Treino de pernas — still de campanha',
-      category: 'educacao-fisica',
-      categoryLabel: 'Educação Física',
+      title: 'Camiseta Use e Poder',
+      category: 'moda',
+      categoryLabel: 'Moda',
       platform: 'Instagram Feed',
       tone: 'ph-tone-1',
-      imageUrl: '' // preencher com a imagem real
+      imageUrl: 'imagens/foto1.png'
     },
     {
       id: 2,
-      title: 'Still de whey protein',
-      category: 'educacao-fisica',
-      categoryLabel: 'Educação Física',
+      title: 'Camiseta Blessed Choice',
+      category: 'moda',
+      categoryLabel: 'Moda',
       platform: 'Instagram Feed',
       tone: 'ph-tone-2',
-      imageUrl: ''
+      imageUrl: 'imagens/foto2.png'
     },
     {
       id: 3,
-      title: 'Foto de rotina de skincare',
-      category: 'beleza',
-      categoryLabel: 'Beleza',
+      title: 'Camiseta Blessed Choice',
+      category: 'moda',
+      categoryLabel: 'Moda',
       platform: 'Instagram Stories',
       tone: 'ph-tone-3',
-      imageUrl: ''
+      imageUrl: 'imagens/foto3.png'
     },
     {
       id: 4,
-      title: 'Still de sérum vitamina C',
-      category: 'beleza',
-      categoryLabel: 'Beleza',
+      title: 'Camiseta Blessed Choice',
+      category: 'moda',
+      categoryLabel: 'Moda',
       platform: 'Instagram Feed',
       tone: 'ph-tone-1',
-      imageUrl: ''
+      imageUrl: 'imagens/foto4.png'
     },
     {
       id: 5,
-      title: 'Look de verão — foto still',
-      category: 'moda',
-      categoryLabel: 'Moda',
+      title: 'CeraVe',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
       platform: 'Instagram Feed',
       tone: 'ph-tone-2',
-      imageUrl: ''
+      imageUrl: 'imagens/foto5.png'
     },
     {
       id: 6,
-      title: 'Foto de lançamento de coleção',
-      category: 'moda',
-      categoryLabel: 'Moda',
+      title: 'Creme capilar',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
       platform: 'Instagram Stories',
       tone: 'ph-tone-3',
-      imageUrl: ''
+      imageUrl: 'imagens/foto6.png'
     },
     {
       id: 7,
-      title: 'Criativo de anúncio — suplemento',
-      category: 'ads',
-      categoryLabel: 'Anúncio',
+      title: 'Máscara de Cílios',
+      category: 'beleza',
+      categoryLabel: 'Beleza',
       platform: 'Meta Ads',
       tone: 'ph-tone-1',
-      imageUrl: ''
-    },
-    {
-      id: 8,
-      title: 'Criativo de anúncio — skincare',
-      category: 'ads',
-      categoryLabel: 'Anúncio',
-      platform: 'Meta Ads',
-      tone: 'ph-tone-2',
-      imageUrl: ''
+      imageUrl: 'imagens/foto7.png'
     }
   ];
 
   const fotosGrid = document.getElementById('fotosGrid');
 
-  function renderPhotos(items) {
-    fotosGrid.innerHTML = items.map(item => `
-      <article class="portfolio-card reveal is-visible" data-category="${item.category}" data-id="${item.id}" tabindex="0" role="button" aria-label="Ver: ${item.title}">
-        <div class="ph ${item.tone}" data-ph="${item.category}"></div>
+ function renderPhotos(items) {
+  fotosGrid.innerHTML = items.map(item => `
+    <article
+      class="portfolio-card reveal is-visible"
+      data-category="${item.category}"
+      data-id="${item.id}"
+      tabindex="0"
+      role="button"
+      aria-label="Ver: ${item.title}"
+    >
+
+      <div class="portfolio-card-media">
+        <img
+          src="${item.imageUrl}"
+          alt="${item.title}"
+          class="portfolio-card-image"
+          loading="lazy"
+        >
         <span class="portfolio-card-play">🔍</span>
-        <div class="portfolio-card-body">
-          <span class="portfolio-card-category">${item.categoryLabel}</span>
-          <h3 class="portfolio-card-title">${item.title}</h3>
-          <span class="portfolio-card-watch">Ver 🔍</span>
-        </div>
-      </article>
-    `).join('');
+      </div>
 
-    fotosGrid.querySelectorAll('.portfolio-card').forEach(card => {
-      card.addEventListener('click', () => openPhotoModal(card.dataset.id));
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openPhotoModal(card.dataset.id);
-        }
-      });
+      <div class="portfolio-card-body">
+        <span class="portfolio-card-category">${item.categoryLabel}</span>
+        <h3 class="portfolio-card-title">${item.title}</h3>
+        <span class="portfolio-card-watch">Ver 🔍</span>
+      </div>
+
+    </article>
+  `).join('');
+
+  fotosGrid.querySelectorAll('.portfolio-card').forEach(card => {
+    card.addEventListener('click', () => openPhotoModal(card.dataset.id));
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openPhotoModal(card.dataset.id);
+      }
     });
-  }
-
+  });
+}
   renderPhotos(photoItems);
 
   const fotosFilterButtons = document.querySelectorAll('#fotosFilters .filter-btn');
