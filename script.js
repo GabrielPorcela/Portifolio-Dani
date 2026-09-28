@@ -381,38 +381,67 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoModalBackdrop = document.getElementById('videoModalBackdrop');
   const videoModalClose = document.getElementById('videoModalClose');
   const videoPlayer = document.getElementById('videoPlayer');
-  const videoModalTitle = document.getElementById('videoModalTitle');
-  const videoModalPlatform = document.getElementById('videoModalPlatform');
-  const videoModalDesc = document.getElementById('videoModalDesc');
 
-function openVideoModal(id) {
+  // Elemento que tinha o foco antes de abrir um modal (para devolvê-lo ao fechar)
+  let lastFocusedEl = null;
+
+  function showModal(modal, closeBtn) {
+    lastFocusedEl = document.activeElement;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus({ preventScroll: true });
+  }
+
+  function hideModal(modal) {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+      lastFocusedEl.focus({ preventScroll: true });
+    }
+    lastFocusedEl = null;
+  }
+
+  function openVideoModal(id) {
     const item = portfolioItems.find(v => String(v.id) === String(id));
     if (!item) return;
 
+    videoModal.classList.remove('is-ready');
     videoPlayer.src = item.video;
     videoPlayer.load();
 
-    videoModalTitle.textContent = item.title;
-    videoModalPlatform.textContent = item.platform;
+    showModal(videoModal, videoModalClose);
 
-    videoModalDesc.textContent = item.description || "";
-
-    videoModal.classList.add('is-open');
-    videoModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-}
+    const playPromise = videoPlayer.play();
+    if (playPromise) playPromise.catch(() => {});
+  }
 
   function closeVideoModal() {
+    if (!videoModal.classList.contains('is-open')) return;
+
+    if (document.fullscreenElement === videoPlayer && document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    }
 
     videoPlayer.pause();
-    videoPlayer.currentTime = 0;
-    videoPlayer.removeAttribute("src");
+    videoPlayer.removeAttribute('src');
     videoPlayer.load();
+    videoModal.classList.remove('is-ready');
 
-    videoModal.classList.remove('is-open');
-    videoModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-}
+    hideModal(videoModal);
+  }
+
+  // Só exibe o player quando as dimensões reais do vídeo são conhecidas
+  ['loadedmetadata', 'error'].forEach(evt => {
+    videoPlayer.addEventListener(evt, () => {
+      if (videoPlayer.getAttribute('src')) videoModal.classList.add('is-ready');
+    });
+  });
+
+  videoModalBackdrop.addEventListener('click', closeVideoModal);
+  videoModalClose.addEventListener('click', closeVideoModal);
+
   /* ==========================================================
      4B. SEÇÃO DE FOTOS
      Réplica da lógica do Portfólio de vídeos (dados, grid,
@@ -552,38 +581,161 @@ function openVideoModal(id) {
   const photoModalBackdrop = document.getElementById('photoModalBackdrop');
   const photoModalClose = document.getElementById('photoModalClose');
   const photoModalThumb = document.getElementById('photoModalThumb');
-  const photoModalTitle = document.getElementById('photoModalTitle');
-  const photoModalPlatform = document.getElementById('photoModalPlatform');
-  const photoModalDesc = document.getElementById('photoModalDesc');
 
   function openPhotoModal(id) {
     const item = photoItems.find(v => String(v.id) === String(id));
-    if (!item) return;
+    if (!item || !item.imageUrl) return;
 
-    photoModalThumb.className = `ph ${item.tone}`;
-    photoModalThumb.setAttribute('data-ph', item.category);
-    photoModalTitle.textContent = item.title;
-    photoModalPlatform.textContent = item.platform;
+    photoModalThumb.src = item.imageUrl;
+    photoModalThumb.alt = item.title;
 
-    photoModalDesc.textContent = item.imageUrl
-      ? `Foto publicada em ${item.platform}.`
-      : `Este espaço será conectado futuramente à imagem real do ${item.platform}. Assim que a foto estiver publicada, o link entra no array "photoItems" em script.js.`;
-
-    photoModal.classList.add('is-open');
-    photoModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    showModal(photoModal, photoModalClose);
   }
 
   function closePhotoModal() {
-    photoModal.classList.remove('is-open');
-    photoModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    if (!photoModal.classList.contains('is-open')) return;
+
+    hideModal(photoModal);
+
+    photoModalThumb.removeAttribute('src');
+    photoModalThumb.alt = '';
   }
 
   photoModalBackdrop.addEventListener('click', closePhotoModal);
   photoModalClose.addEventListener('click', closePhotoModal);
+
+  // Clicar na área vazia ao redor da mídia também fecha
+  document.querySelectorAll('.media-modal-stage').forEach(stage => {
+    stage.addEventListener('click', (e) => {
+      if (e.target !== stage) return;
+      closeVideoModal();
+      closePhotoModal();
+    });
+  });
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closePhotoModal();
+    if (e.key !== 'Escape') return;
+    closeVideoModal();
+    closePhotoModal();
+  });
+
+  /* ==========================================================
+     4C. MATERIAL DE TRABALHO
+     Equipamentos de produção. Para trocar as fotos, basta colocar
+     os arquivos indicados em "imageUrl" na pasta imagens/.
+     ========================================================== */
+  const equipmentItems = [
+    {
+      id: 1,
+      title: 'Ring Light',
+      description: 'Iluminação frontal para vídeos e fotos com acabamento mais uniforme.',
+      tone: 'ph-tone-1',
+      imageUrl: 'imagens/ring-light.jpg'
+    },
+    {
+      id: 2,
+      title: 'Softbox',
+      description: 'Iluminação suave para criar uma luz mais equilibrada e profissional.',
+      tone: 'ph-tone-2',
+      imageUrl: 'imagens/softbox.jpg'
+    },
+    {
+      id: 3,
+      title: 'Tripé',
+      description: 'Estabilidade e praticidade para gravações e fotografias.',
+      tone: 'ph-tone-3',
+      imageUrl: 'imagens/tripe.jpg'
+    }
+  ];
+
+  const equipmentGrid = document.getElementById('equipmentGrid');
+
+  function renderEquipment(items) {
+    equipmentGrid.innerHTML = items.map(item => `
+      <article
+        class="portfolio-card equipment-card reveal is-visible"
+        data-id="${item.id}"
+        tabindex="0"
+        role="button"
+        aria-label="Ver: ${item.title}"
+      >
+        <div class="ph ${item.tone}"></div>
+        <img
+          src="${item.imageUrl}"
+          alt="${item.title}"
+          class="equipment-card-img"
+          loading="lazy"
+        >
+        <span class="portfolio-card-play">🔍</span>
+
+        <div class="portfolio-card-body">
+          <span class="portfolio-card-category">Equipamento</span>
+          <h3 class="portfolio-card-title">${item.title}</h3>
+          <p class="equipment-card-desc">${item.description}</p>
+          <span class="portfolio-card-watch">Ver 🔍</span>
+        </div>
+      </article>
+    `).join('');
+
+    equipmentGrid.querySelectorAll('.equipment-card').forEach(card => {
+      // Enquanto a foto não existir na pasta, o placeholder (.ph) fica visível
+      const img = card.querySelector('.equipment-card-img');
+      img.addEventListener('error', () => img.classList.add('is-missing'));
+
+      card.addEventListener('click', () => openEquipmentModal(card.dataset.id));
+
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openEquipmentModal(card.dataset.id);
+        }
+      });
+    });
+  }
+
+  renderEquipment(equipmentItems);
+
+  const equipmentModal = document.getElementById('equipmentModal');
+  const equipmentModalBackdrop = document.getElementById('equipmentModalBackdrop');
+  const equipmentModalClose = document.getElementById('equipmentModalClose');
+  const equipmentModalImg = document.getElementById('equipmentModalImg');
+  const equipmentModalPh = equipmentModal.querySelector('.equipment-modal-ph');
+
+  equipmentModalImg.addEventListener('error', () => {
+    if (equipmentModalImg.getAttribute('src')) equipmentModal.classList.add('is-missing');
+  });
+
+  function openEquipmentModal(id) {
+    const item = equipmentItems.find(v => String(v.id) === String(id));
+    if (!item) return;
+
+    equipmentModal.classList.remove('is-missing');
+    equipmentModalPh.className = `ph equipment-modal-ph ${item.tone}`;
+    equipmentModalImg.src = item.imageUrl;
+    equipmentModalImg.alt = item.title;
+
+    showModal(equipmentModal, equipmentModalClose);
+  }
+
+  function closeEquipmentModal() {
+    if (!equipmentModal.classList.contains('is-open')) return;
+
+    hideModal(equipmentModal);
+
+    equipmentModalImg.removeAttribute('src');
+    equipmentModalImg.alt = '';
+    equipmentModal.classList.remove('is-missing');
+  }
+
+  equipmentModalBackdrop.addEventListener('click', closeEquipmentModal);
+  equipmentModalClose.addEventListener('click', closeEquipmentModal);
+
+  equipmentModal.querySelector('.media-modal-stage').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeEquipmentModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeEquipmentModal();
   });
 
   /* ==========================================================
