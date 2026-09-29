@@ -568,71 +568,65 @@ textarea:focus-visible, select:focus-visible {
 }
 .portfolio-card.is-hidden { display: none; }
 
-/* Modal de vídeo */
+/* Modais de mídia (vídeo e foto) */
 .video-modal {
   position: fixed; inset: 0; z-index: 400;
   display: flex; align-items: center; justify-content: center;
   opacity: 0; visibility: hidden;
   transition: opacity var(--dur) var(--ease), visibility 0s linear var(--dur);
-  padding: 24px;
 }
 .video-modal.is-open {
   opacity: 1; visibility: visible;
   transition: opacity var(--dur) var(--ease), visibility 0s;
 }
-.video-modal-backdrop { position: absolute; inset: 0; background: rgba(33,28,26,.7); backdrop-filter: blur(6px); }
-.video-modal-content {
+.video-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(22,18,17,.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.media-modal-stage {
   position: relative;
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  max-width: 620px; width: 100%;
-  display: grid; grid-template-columns: .8fr 1.2fr;
-  overflow: hidden;
-  transform: translateY(24px) scale(.97);
-  transition: transform var(--dur) var(--ease);
-  max-height: 86vh;
-}
-.video-modal.is-open .video-modal-content { transform: translateY(0) scale(1); }
-.video-modal-frame { background: var(--color-bg-alt); display: flex; align-items: center; justify-content: center; padding: 24px; }
-.phone-modal {
-    position: relative;
-    width: 100%;
-    max-width: 170px;
-    aspect-ratio: 9 / 17.5;
-    border-radius: 24px;
-    border-width: 6px;
-    overflow: hidden;
-}
-
-.video-modal-play {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-  width: 46px; height: 46px; border-radius: 50%;
-  background: rgba(255,255,255,.9);
+  width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-ink);
+  padding: 72px 24px 32px;
+  transform: translateY(18px) scale(.98);
+  transition: transform var(--dur) var(--ease);
 }
-.video-modal-info { padding: 32px 30px; overflow-y: auto; }
-.video-modal-platform {
-  font-family: var(--font-label); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--color-accent);
+.video-modal.is-open .media-modal-stage { transform: none; }
+
+/* Mídia: tamanho natural limitado à viewport, sem cortes nem distorção */
+.video-player,
+.media-modal-img {
+  display: block;
+  width: auto; height: auto;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 104px);
+  max-height: calc(100dvh - 104px);
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,.6);
 }
-.video-modal-info h3 { font-family: var(--font-display); font-size: 1.5rem; margin: 10px 0 12px; }
-.video-modal-info p { color: var(--color-ink-soft); font-size: .93rem; }
+.video-player {
+  background: #000;
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+}
+.video-modal.is-ready .video-player { opacity: 1; }
+
 .video-modal-close {
-  position: absolute; top: 14px; right: 14px;
-  width: 34px; height: 34px; border-radius: 50%;
-  background: var(--color-bg-alt);
-  font-size: 20px; line-height: 1;
+  position: absolute; top: 18px; right: 18px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.22);
+  color: #fff;
+  font-size: 26px; line-height: 1;
   display: flex; align-items: center; justify-content: center;
   z-index: 2;
+  transition: background .25s var(--ease), transform .25s var(--ease);
 }
-
-.video-player {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: contain;
-}
+.video-modal-close:hover { background: rgba(255,255,255,.24); transform: rotate(90deg); }
+.video-modal-close:focus-visible { outline: 2px solid var(--color-accent-soft); outline-offset: 3px; }
 
 /* ==========================================================
    ENQUADRAMENTO DOS VÍDEOS DO PORTFÓLIO
@@ -653,6 +647,43 @@ textarea:focus-visible, select:focus-visible {
     object-fit: cover;
     object-position: center;
 }
+
+/* ==========================================================
+   MATERIAL DE TRABALHO
+   Reaproveita o visual de .portfolio-card
+   ========================================================== */
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.equipment-card { aspect-ratio: 4/5; }
+.equipment-card-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.equipment-card-img.is-missing { display: none; }
+.equipment-card-desc {
+  font-size: .85rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,.82);
+  margin: -4px 0 14px;
+}
+
+/* Modal: placeholder exibido apenas enquanto a foto não existir */
+.equipment-modal-ph {
+  display: none;
+  width: min(420px, calc(100vw - 48px));
+  height: auto;
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-md);
+}
+#equipmentModal.is-missing .media-modal-img { display: none; }
+#equipmentModal.is-missing .equipment-modal-ph { display: block; }
 
 /* -------------------- 12. SERVIÇOS -------------------- */
 .services-grid {
@@ -933,8 +964,8 @@ textarea:focus-visible, select:focus-visible {
   .menu-toggle { display: flex; }
   .niches-grid { grid-template-columns: 1fr; }
   .results-grid { grid-template-columns: repeat(2, 1fr); }
-  .video-modal-content { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; }
-  .video-modal-frame { padding: 30px; }
+  .equipment-grid { gap: 20px; }
+  .equipment-card { aspect-ratio: 3/4; }
 }
 
 @media (max-width: 600px) {
@@ -951,6 +982,15 @@ textarea:focus-visible, select:focus-visible {
   .testimonial-card { padding: 32px 26px; }
   .about-tag { position: static; margin-top: 18px; }
   .float-badge { font-size: 11px; padding: 9px 14px; }
+  .equipment-grid { grid-template-columns: 1fr; max-width: 380px; }
+  .media-modal-stage { padding: 68px 12px 16px; }
+  .video-player,
+  .media-modal-img {
+    max-width: calc(100vw - 24px);
+    max-height: calc(100vh - 84px);
+    max-height: calc(100dvh - 84px);
+  }
+  .video-modal-close { top: 12px; right: 12px; }
 }
 
 /* -------------------- 22. MOVIMENTO REDUZIDO -------------------- */
