@@ -177,57 +177,19 @@
 </section>
 
 <!-- Modal de vídeo (placeholder para futura integração) -->
-<div class="video-modal" id="videoModal" aria-hidden="true">
+<div class="video-modal media-modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vídeo do portfólio">
   <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
-  <div class="video-modal-content">
-    
-    <button
-      class="video-modal-close"
-      id="videoModalClose"
-      aria-label="Fechar">
-      &times;
-    </button>
-
-  <div class="video-modal-frame">
-
-  <div class="phone-frame phone-modal">
-
+  <button class="video-modal-close" id="videoModalClose" aria-label="Fechar">&times;</button>
+  <div class="media-modal-stage">
     <video
       id="videoPlayer"
       class="video-player"
       controls
       playsinline
       preload="metadata">
-
-      <source src="videos/video1.mp4" type="video/mp4">
-
       Seu navegador não suporta vídeo.
     </video>
-
   </div>
-
-  </div>
-
-    <div class="video-modal-info">
-
-      <span
-        class="video-modal-platform"
-        id="videoModalPlatform">
-        Instagram Reels
-      </span>
-
-      <h3 id="videoModalTitle">
-        Título do vídeo
-      </h3>
-
-      <p id="videoModalDesc">
-        Este espaço será conectado futuramente ao embed real do Instagram, TikTok ou YouTube.
-      </p>
-
-    </div>
-
-  </div>
-
 </div>
 
 <!-- ============================================= -->
@@ -254,22 +216,38 @@
 </section>
 
 <!-- Modal de foto (placeholder para futura integração) -->
-<div class="video-modal" id="photoModal" aria-hidden="true">
+<div class="video-modal media-modal" id="photoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Foto do portfólio">
   <div class="video-modal-backdrop" id="photoModalBackdrop"></div>
-  <div class="video-modal-content">
-    <button class="video-modal-close" id="photoModalClose" aria-label="Fechar">&times;</button>
-    <div class="video-modal-frame">
-      <div class="phone-frame phone-modal">
-        <div class="ph ph-tone-1" id="photoModalThumb"></div>
-      </div>
+  <button class="video-modal-close" id="photoModalClose" aria-label="Fechar">&times;</button>
+  <div class="media-modal-stage">
+    <img class="media-modal-img" id="photoModalThumb" alt="">
+  </div>
+</div>
+
+<!-- ============================================= -->
+<!-- 4C. MATERIAL DE TRABALHO                      -->
+<!-- ============================================= -->
+<section class="section" id="equipamentos">
+  <div class="container">
+    <span class="eyebrow reveal center">Bastidores</span>
+    <h2 class="section-title center reveal">Material de trabalho</h2>
+    <p class="section-lead center reveal">
+      Equipamentos que fazem parte da minha rotina de produção e ajudam a criar conteúdos com qualidade, consistência e profissionalismo.
+    </p>
+
+    <div class="equipment-grid" id="equipmentGrid">
+      <!-- Cards gerados via JavaScript a partir do array "equipmentItems" em script.js -->
     </div>
-    <div class="video-modal-info">
-      <span class="video-modal-platform" id="photoModalPlatform">Instagram</span>
-      <h3 id="photoModalTitle">Título da foto</h3>
-      <p id="photoModalDesc">
-        Este espaço será conectado futuramente à imagem real.
-      </p>
-    </div>
+  </div>
+</section>
+
+<!-- Modal de equipamento -->
+<div class="video-modal media-modal" id="equipmentModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Foto do equipamento">
+  <div class="video-modal-backdrop" id="equipmentModalBackdrop"></div>
+  <button class="video-modal-close" id="equipmentModalClose" aria-label="Fechar">&times;</button>
+  <div class="media-modal-stage">
+    <img class="media-modal-img" id="equipmentModalImg" alt="">
+    <div class="ph equipment-modal-ph" data-ph="Foto em breve"></div>
   </div>
 </div>
 
