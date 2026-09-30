@@ -1,5 +1,5 @@
 /* =====================================================================
-   LAÍS MONTEIRO — UGC CREATOR PORTFOLIO
+   DANIELLA ABREU — UGC CREATOR PORTFOLIO
    JavaScript puro — sem frameworks/dependências externas
    ===================================================================== */
 
@@ -630,21 +630,21 @@ document.addEventListener('DOMContentLoaded', () => {
       title: 'Ring Light',
       description: 'Iluminação frontal para vídeos e fotos com acabamento mais uniforme.',
       tone: 'ph-tone-1',
-      imageUrl: 'imagens/ring-light.jpg'
+      imageUrl: 'imagens/ring.png'
     },
     {
       id: 2,
       title: 'Softbox',
       description: 'Iluminação suave para criar uma luz mais equilibrada e profissional.',
       tone: 'ph-tone-2',
-      imageUrl: 'imagens/softbox.jpg'
+      imageUrl: 'imagens/softbox.png'
     },
     {
       id: 3,
       title: 'Tripé',
       description: 'Estabilidade e praticidade para gravações e fotografias.',
       tone: 'ph-tone-3',
-      imageUrl: 'imagens/tripe.jpg'
+      imageUrl: 'imagens/tripe.png'
     }
   ];
 
