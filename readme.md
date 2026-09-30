@@ -191,4 +191,91 @@ No final, me mostre um resumo objetivo:
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------
+PROMPT 2 
+Adicione uma nova seção chamada **"Investimentos"** imediatamente antes da seção **"Contato"** do projeto.
+
+IMPORTANTE:
+
+* Não altere o layout das outras seções.
+* Não altere a identidade visual existente do site.
+* Não crie uma cópia do print de referência.
+* Use o conteúdo abaixo apenas como referência para estruturar os textos e informações da seção.
+* A seção deve ser responsiva e seguir a estilização já existente no Portifolio-Dani.
+
+### SEÇÃO: INVESTIMENTOS
+
+A seção deve apresentar os pacotes de serviços UGC disponíveis para contratação.
+
+Antes dos pacotes, destacar a informação:
+
+**Todos os pacotes estão incluídos:**
+
+* Triagem
+* Roteiro
+* Gravação
+* Edição
+* Stories
+* Formato criativo e nativo
+
+### PACOTE 1
+
+**R$ 350,00**
+
+Inclui:
+
+* 1 vídeo
+* 2 fotos
+* 1 story
+* Uso em ads/sites/marketplace por 2 meses
+* Demais redes: vitalício
+
+### PACOTE 2
+
+**R$ 557,00**
+
+Inclui:
+
+* 2 vídeos
+* 5 fotos
+* 1 story
+* Uso em ads/sites/marketplace por 4 meses
+* Demais redes: vitalício
+
+### PACOTE 3
+
+**R$ 947,00**
+
+Inclui:
+
+* 3 vídeos
+* 10 fotos
+* 2 stories
+* Uso em ads/sites/marketplace por 6 meses
+* Demais redes: vitalício
+
+### CONTEÚDOS UGC
+
+Adicionar também um bloco explicando o processo de produção:
+
+**Alinhamento inicial:** Após o interesse mútuo, o contrato é enviado e assinado. A empresa escolhe e envia os produtos.
+
+**Produção:** Com os produtos em mãos, o roteiro é entregue em até 3 dias úteis para aprovação. O conteúdo final é gravado e editado em alta qualidade e entregue em até 7 dias úteis.
+
+**Distribuição:** Os conteúdos podem ser utilizados em ads, redes sociais, marketplaces, sites e outros canais, conforme o período de uso contratado.
+
+### CHAMADA PARA AÇÃO
+
+No final da seção, adicionar uma chamada incentivando o visitante a entrar em contato para contratar um pacote ou tirar dúvidas.
+
+O botão deve direcionar para a seção **Contato**, onde o usuário poderá enviar uma mensagem para a criadora.
+
+Exemplo de texto:
+
+**"Vamos criar conteúdos que conectam sua marca ao seu público?"**
+
+Botão:
+
+**"Falar sobre meu projeto"**
+
+A seção deve ficar posicionada entre a seção de serviços/portfólio existente e a seção de contato.
 
