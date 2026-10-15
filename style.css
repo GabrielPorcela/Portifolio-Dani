@@ -1,5 +1,5 @@
 /* =====================================================================
-   LAÍS MONTEIRO — UGC CREATOR PORTFOLIO
+   DANIELLA ABREU — UGC CREATOR PORTFOLIO
    Sistema de Design
    Paleta: ivory rosado + tinta quase-preta + rosé/mauve + dourado
    Tipografia: Fraunces (display) / Manrope (corpo) / Jost (rótulos)
@@ -351,42 +351,6 @@ textarea:focus-visible, select:focus-visible {
 }
 .hero .btn-ghost:hover { background: #fff; color: var(--color-ink); }
 
-.hero-stats { display: flex; gap: 44px; flex-wrap: wrap; }
-.hero-stat { display: flex; flex-direction: column; }
-.hero-stat strong { font-family: var(--font-display); font-size: 1.7rem; color: var(--color-accent); }
-.hero-stat span { font-size: 13px; color: var(--color-ink-soft); }
-
-/* Elemento de assinatura: imagem única em destaque no hero */
-.hero-visual { position: relative; display: flex; justify-content: center; }
-.hero-photo-frame {
-  position: relative; width: 100%; max-width: 560px; aspect-ratio: 3/2;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 30px 60px -20px rgba(33, 28, 26, .45);
-}
-.hero-photo-frame img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.float-badge {
-  position: absolute;
-  background: var(--color-surface);
-  color: var(--color-ink);
-  font-family: var(--font-label);
-  font-size: 12.5px;
-  font-weight: 500;
-  padding: 12px 18px;
-  border-radius: 999px;
-  box-shadow: 0 14px 30px -10px rgba(33,28,26,.22);
-  z-index: 4;
-  animation: floatY 5s ease-in-out infinite;
-}
-.badge-1 { top: 8%; left: -8%; animation-delay: .3s; }
-.badge-2 { bottom: 8%; right: -10%; animation-delay: 1.1s; }
-@keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
 .scroll-cue {
   position: absolute;
@@ -463,34 +427,6 @@ textarea:focus-visible, select:focus-visible {
   font-weight: 700;
 }
 
-/* -------------------- 10. NICHOS -------------------- */
-.niches-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-.niche-card {
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 20px 45px -24px rgba(33,28,26,.25);
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-}
-.niche-card:hover { transform: translateY(-8px); box-shadow: 0 30px 55px -20px rgba(33,28,26,.3); }
-.niche-image { aspect-ratio: 4/3; }
-.niche-body { padding: 30px 28px 34px; }
-.niche-body h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin-bottom: 12px; }
-.niche-body p { color: var(--color-ink-soft); font-size: .95rem; margin-bottom: 20px; }
-.tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.tag-list li {
-  font-family: var(--font-label);
-  font-size: 11.5px;
-  letter-spacing: .03em;
-  padding: 7px 13px;
-  border-radius: 999px;
-  background: var(--color-bg-alt);
-  color: var(--color-accent-dark);
-}
 
 /* -------------------- 11. PORTFÓLIO -------------------- */
 .portfolio-filters {
@@ -685,7 +621,148 @@ textarea:focus-visible, select:focus-visible {
 #equipmentModal.is-missing .media-modal-img { display: none; }
 #equipmentModal.is-missing .equipment-modal-ph { display: block; }
 
-/* -------------------- 12. SERVIÇOS -------------------- */
+/* -------------------- 12. REELS DE SUCESSO -------------------- */
+.reels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.reel-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: 0 20px 50px -24px rgba(33, 28, 26, .28);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.reel-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 32px 60px -20px rgba(33, 28, 26, .35);
+}
+
+.reel-card-media {
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: var(--color-bg-alt);
+  cursor: pointer;
+}
+.reel-card-media:focus-visible { outline-offset: -4px; }
+
+/* Ícone de play discreto sobre a capa */
+.reel-card-play {
+  position: absolute; top: 50%; left: 50%;
+  width: 54px; height: 54px;
+  margin: -27px 0 0 -27px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.22);
+  border: 1px solid rgba(255,255,255,.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  padding-left: 3px;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,.45);
+  z-index: 2;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.reel-card:hover .reel-card-play,
+.reel-card-media:focus-visible .reel-card-play {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: scale(1.06);
+}
+
+/* Selo de visualizações (canto inferior direito) */
+.reel-card-views {
+  position: absolute; right: 12px; bottom: 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: rgba(22,18,17,.58);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  font-family: var(--font-label);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  line-height: 1;
+  z-index: 2;
+}
+.reel-card-views svg { flex-shrink: 0; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.reel-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform .7s var(--ease);
+}
+
+.reel-card:hover .reel-card-img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 860px) {
+  .reels-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reels-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .reel-card {
+    border-radius: var(--radius-md);
+  }
+
+  .reel-card-play {
+    width: 36px; height: 36px;
+    margin: -18px 0 0 -18px;
+    padding-left: 2px;
+  }
+  .reel-card-play svg { width: 14px; height: 14px; }
+
+  .reel-card-views {
+    right: 6px; bottom: 6px;
+    gap: 4px;
+    padding: 4px 7px;
+    font-size: 10.5px;
+  }
+  .reel-card-views svg { width: 11px; height: 11px; }
+}
+
+/* Modal no modo reel: player vertical 9:16 */
+.video-modal.is-reel .video-player {
+  aspect-ratio: 9 / 16;
+  height: auto;
+  width: min(calc(100vw - 48px), calc((100vh - 104px) * 9 / 16));
+  width: min(calc(100vw - 48px), calc((100dvh - 104px) * 9 / 16));
+}
+
+/* -------------------- 14. SERVIÇOS -------------------- */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -709,7 +786,7 @@ textarea:focus-visible, select:focus-visible {
 .service-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; margin-bottom: 8px; }
 .service-card p { font-size: .9rem; color: var(--color-ink-soft); }
 
-/* -------------------- 13. RESULTADOS -------------------- */
+/* -------------------- 15. RESULTADOS -------------------- */
 .results-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -731,33 +808,88 @@ textarea:focus-visible, select:focus-visible {
 }
 .result-label { font-size: .92rem; color: var(--color-ink-soft); }
 
-/* -------------------- 14. MARCAS -------------------- */
-.brands-section .section-title { margin-bottom: 56px; }
-.brands-marquee { overflow: hidden; position: relative; }
-.brands-marquee::before, .brands-marquee::after {
-  content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2;
+/* -------------------- 16. MARCAS -------------------- */
+.brands-section .section-title { margin-bottom: 48px; }
+
+/* Faixa de logos: rola sozinha no desktop e pausa ao passar o mouse.
+   As bordas esmaecem com mask-image para não depender da cor do fundo. */
+.brands-marquee {
+  --logo-h: 60px;
+  --logo-gap: 72px;
+  overflow: hidden;
+  padding: 12px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
 }
-.brands-marquee::before { left: 0; background: linear-gradient(to right, var(--color-bg-alt), transparent); }
-.brands-marquee::after { right: 0; background: linear-gradient(to left, var(--color-bg-alt), transparent); }
+
+/* padding-right = gap: assim a 2ª metade (clones) começa exatamente em -50% */
 .brands-track {
   display: flex;
-  width: max-content;
-  gap: 70px;
   align-items: center;
-  animation: marquee 28s linear infinite;
+  gap: var(--logo-gap);
+  width: max-content;
+  padding-right: var(--logo-gap);
+  animation: marquee 30s linear infinite;
 }
 .brands-marquee:hover .brands-track { animation-play-state: paused; }
-.brand-logo {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.4rem;
-  color: var(--color-ink-faint);
-  white-space: nowrap;
-  letter-spacing: .01em;
-}
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* -------------------- 15. DEPOIMENTOS -------------------- */
+/* Altura única para todos; a largura acompanha a proporção de cada imagem */
+.brand-logo {
+  display: block;
+  flex: none;
+  height: var(--logo-h);
+  width: auto;
+  object-fit: contain;
+  opacity: .85;
+  transition: opacity var(--dur) var(--ease);
+}
+.brand-logo:hover { opacity: 1; }
+
+/* Garnier: o arquivo tem faixas transparentes em cima e embaixo */
+.brand-logo--wide { height: calc(var(--logo-h) * 1.1); }
+
+/* DS e Cristina: o símbolo ocupa só ~30% da altura do arquivo (335×745).
+   A imagem cresce para o símbolo ficar do tamanho dos demais, e as margens
+   negativas descontam a área transparente sem cortar nada. */
+.brand-logo--tall {
+  height: calc(var(--logo-h) * 3.2);
+  margin: calc(var(--logo-h) * -1.1) calc(var(--logo-h) * -.2);
+}
+
+/* Blessed: o logo ocupa ~60% do quadro, com respiro transparente em volta */
+.brand-logo--padded {
+  height: calc(var(--logo-h) * 2.1);
+  margin: calc(var(--logo-h) * -.55) calc(var(--logo-h) * -.3);
+}
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Celular/touch e movimento reduzido: sem animação, rolagem com o dedo */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .brands-marquee {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .brands-marquee::-webkit-scrollbar { display: none; }
+  .brands-track {
+    animation: none;
+    margin-inline: auto;
+    padding-left: var(--logo-gap);
+  }
+  .brand-logo { scroll-snap-align: center; opacity: 1; }
+  .brand-logo--clone { display: none; }
+}
+
+@media (max-width: 560px) {
+  .brands-marquee {
+    --logo-h: 46px;
+    --logo-gap: 44px;
+  }
+}
+
+/* -------------------- 17. DEPOIMENTOS -------------------- */
 .testimonials-wrap { max-width: 760px; margin: 0 auto; }
 .testimonials-track {
   display: flex;
@@ -798,7 +930,7 @@ textarea:focus-visible, select:focus-visible {
 }
 .testimonials-dots button.is-active { background: var(--color-accent); width: 22px; border-radius: 6px; }
 
-/* -------------------- 16. PROCESSO -------------------- */
+/* -------------------- 18. PROCESSO -------------------- */
 .process-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -828,7 +960,7 @@ textarea:focus-visible, select:focus-visible {
   .process-step:not(:last-child)::after { display: block; }
 }
 
-/* -------------------- 17. FAQ -------------------- */
+/* -------------------- 19. FAQ -------------------- */
 .faq-container { max-width: 760px; }
 .faq-list { display: flex; flex-direction: column; }
 .faq-item { border-bottom: 1px solid var(--color-line); }
@@ -859,7 +991,114 @@ textarea:focus-visible, select:focus-visible {
 .faq-item.is-open .faq-answer { max-height: 200px; padding-bottom: 24px; }
 .faq-answer p { color: var(--color-ink-soft); max-width: 620px; font-size: .95rem; }
 
-/* -------------------- 18. CONTATO -------------------- */
+/* -------------------- 19b. INVESTIMENTO -------------------- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  padding: 40px 32px 34px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 34px -22px rgba(33,28,26,.25);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.pricing-card:hover { transform: translateY(-6px); box-shadow: 0 24px 40px -18px rgba(33,28,26,.28); }
+.pricing-card.is-featured {
+  border: 1.5px solid var(--color-accent);
+  box-shadow: 0 24px 50px -24px rgba(169, 68, 90, .45);
+}
+.pricing-badge {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 7px 18px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pricing-name {
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 14px 0 26px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--color-line);
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4vw, 3.2rem);
+  line-height: 1;
+  color: var(--color-ink);
+}
+.pricing-currency { font-size: 1.1rem; color: var(--color-ink-soft); margin-right: 4px; }
+.pricing-cents { font-size: 1.1rem; color: var(--color-ink-soft); }
+.pricing-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.pricing-list li {
+  position: relative;
+  padding-left: 28px;
+  font-size: .95rem;
+  color: var(--color-ink-soft);
+}
+.pricing-list li::before {
+  content: '';
+  position: absolute;
+  left: 2px; top: .45em;
+  width: 13px; height: 7px;
+  border-left: 1.6px solid var(--color-accent);
+  border-bottom: 1.6px solid var(--color-accent);
+  transform: rotate(-45deg);
+}
+.pricing-list strong { color: var(--color-ink); font-weight: 600; }
+.pricing-card .btn { margin-top: auto; }
+
+.pricing-details {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 24px;
+  max-width: 1080px;
+  margin: 70px auto 0;
+}
+.pricing-included,
+.pricing-steps {
+  background: var(--color-bg-alt);
+  padding: 38px 34px;
+  border-radius: var(--radius-lg);
+}
+.pricing-subtitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.pricing-included .pricing-list { margin-bottom: 0; }
+.pricing-steps-list { display: flex; flex-direction: column; gap: 18px; }
+.pricing-steps-list li { display: flex; gap: 18px; align-items: baseline; }
+.pricing-steps-list .process-index { margin-bottom: 0; font-size: 1.3rem; min-width: 30px; color: var(--color-accent); }
+.pricing-steps-list p { font-size: .93rem; color: var(--color-ink-soft); }
+.pricing-steps-list strong { color: var(--color-ink); font-weight: 600; }
+
+/* -------------------- 20. CONTATO -------------------- */
 .contact-grid {
   display: grid;
   grid-template-columns: .9fr 1.1fr;
@@ -908,15 +1147,10 @@ textarea:focus-visible, select:focus-visible {
 .form-row textarea { resize: vertical; }
 .form-note { font-size: .85rem; color: var(--color-accent); min-height: 18px; }
 
-/* -------------------- 19. FOOTER -------------------- */
+/* -------------------- 21. FOOTER -------------------- */
 .site-footer { padding: 60px 0 40px; text-align: center; }
-.site-footer .logo {
-  color: #96838d;
-}
-
-.site-footer .logo span {
-  color: #c427af;
-}
+.site-footer .logo { color: var(--color-ink-soft); }
+.site-footer .logo span { color: var(--color-accent); }
 .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .site-footer p { color: var(--color-ink-soft); font-size: .9rem; }
 .footer-social { display: flex; gap: 22px; margin: 8px 0; }
@@ -939,7 +1173,7 @@ textarea:focus-visible, select:focus-visible {
 .back-to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
 .back-to-top:hover { background: var(--color-accent); }
 
-/* -------------------- 20. SCROLL REVEAL -------------------- */
+/* -------------------- 22. SCROLL REVEAL -------------------- */
 .reveal {
   opacity: 0;
   transform: translateY(28px);
@@ -947,11 +1181,16 @@ textarea:focus-visible, select:focus-visible {
 }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-/* -------------------- 21. RESPONSIVO -------------------- */
+/* -------------------- 23. RESPONSIVO -------------------- */
+/* Nav mais compacta em telas médias para acomodar todos os itens */
+@media (max-width: 1280px) {
+  .nav-link { padding: 10px 12px; }
+}
+
 @media (max-width: 1080px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 80px; }
-  .hero-visual { order: -1; }
-  .hero-photo-frame { max-width: 420px; margin: 0 auto; }
+  .nav-link { padding: 8px 9px; font-size: 12.5px; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 520px; gap: 34px; }
+  .pricing-details { grid-template-columns: 1fr; max-width: 520px; margin-top: 50px; }
   .about-grid { grid-template-columns: 1fr; gap: 90px; }
   .about-visual { max-width: 380px; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -962,7 +1201,6 @@ textarea:focus-visible, select:focus-visible {
 @media (max-width: 860px) {
   .main-nav { display: none; }
   .menu-toggle { display: flex; }
-  .niches-grid { grid-template-columns: 1fr; }
   .results-grid { grid-template-columns: repeat(2, 1fr); }
   .equipment-grid { gap: 20px; }
   .equipment-card { aspect-ratio: 3/4; }
@@ -975,13 +1213,13 @@ textarea:focus-visible, select:focus-visible {
   .hero-content { padding: 0 20px; }
   .scroll-cue { display: none; }
   .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-stats { gap: 26px; }
   .services-grid { grid-template-columns: 1fr; }
   .process-grid { grid-template-columns: 1fr; }
   .contact-form { padding: 26px; }
+  .pricing-card { padding: 36px 24px 28px; }
+  .pricing-included, .pricing-steps { padding: 30px 22px; }
   .testimonial-card { padding: 32px 26px; }
   .about-tag { position: static; margin-top: 18px; }
-  .float-badge { font-size: 11px; padding: 9px 14px; }
   .equipment-grid { grid-template-columns: 1fr; max-width: 380px; }
   .media-modal-stage { padding: 68px 12px 16px; }
   .video-player,
@@ -991,9 +1229,13 @@ textarea:focus-visible, select:focus-visible {
     max-height: calc(100dvh - 84px);
   }
   .video-modal-close { top: 12px; right: 12px; }
+  .video-modal.is-reel .video-player {
+    width: min(calc(100vw - 24px), calc((100vh - 84px) * 9 / 16));
+    width: min(calc(100vw - 24px), calc((100dvh - 84px) * 9 / 16));
+  }
 }
 
-/* -------------------- 22. MOVIMENTO REDUZIDO -------------------- */
+/* -------------------- 24. MOVIMENTO REDUZIDO -------------------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .001ms !important;
@@ -1003,9 +1245,3 @@ textarea:focus-visible, select:focus-visible {
   }
 }
 
-.phone-frame img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}

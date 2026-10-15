@@ -124,12 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: 12,
-      title: 'Editável',
-      category: 'ads',
-      categoryLabel: 'Anúncio',
+      title: 'Camisetas',
+      category: 'moda',
+      categoryLabel: 'Moda',
       platform: 'TikTok Ads',
       tone: 'ph-tone-2',
-      video: 'videos/video12.mp',
+      video: 'videos/video30.mp4',
       description: 'Vídeo de campanha.'
     },
     {
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
       categoryLabel: 'Anúncio',
       platform: 'TikTok Ads',
       tone: 'ph-tone-2',
-      video: 'videos/video8.mp',
+      video: 'videos/video8.mp4',
       description: 'Vídeo de campanha.'
     },
     {
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================
      3. FILTRO DO PORTFÓLIO
      ========================================================== */
-  const filterButtons = document.querySelectorAll('.filter-btn');
+  const filterButtons = document.querySelectorAll('#portfolioFilters .filter-btn');
 
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -407,8 +407,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const item = portfolioItems.find(v => String(v.id) === String(id));
     if (!item) return;
 
+    playInVideoModal(item.video);
+  }
+
+  // Abre o modal de vídeo com qualquer arquivo; "isReel" força o formato 9:16
+  function playInVideoModal(src, isReel = false) {
     videoModal.classList.remove('is-ready');
-    videoPlayer.src = item.video;
+    videoModal.classList.toggle('is-reel', isReel);
+    videoPlayer.src = src;
     videoPlayer.load();
 
     showModal(videoModal, videoModalClose);
@@ -427,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
     videoPlayer.pause();
     videoPlayer.removeAttribute('src');
     videoPlayer.load();
-    videoModal.classList.remove('is-ready');
+    videoModal.classList.remove('is-ready', 'is-reel');
 
     hideModal(videoModal);
   }
@@ -441,6 +447,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   videoModalBackdrop.addEventListener('click', closeVideoModal);
   videoModalClose.addEventListener('click', closeVideoModal);
+
+  /* ==========================================================
+     4A. REELS DE SUCESSO
+     O vídeo de cada capa vem do atributo data-video no HTML
+     (seção #reels). Reaproveita o modal de vídeo acima.
+     ========================================================== */
+  document.querySelectorAll('#reels .reel-card-media[data-video]').forEach(cover => {
+    cover.addEventListener('click', () => playInVideoModal(cover.dataset.video, true));
+  });
 
   /* ==========================================================
      4B. SEÇÃO DE FOTOS
@@ -894,7 +909,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================== */
   const contactForm = document.getElementById('contactForm');
   const formNote = document.getElementById('formNote');
-  const whatsappNumber = '5500000000000'; // formato: 55 + DDD + número
+  const whatsappNumber = '5551985919822';
 
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -916,7 +931,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const texto = `Olá, Laís! Meu nome é ${nome} e represento a marca ${marca}.%0A%0A` +
+    const texto = `Olá, Daniella! Meu nome é ${nome} e represento a marca ${marca}.%0A%0A` +
       `Email: ${email}%0ATipo de conteúdo desejado: ${tipo}%0A%0AMensagem: ${mensagem}`;
 
     formNote.textContent = 'Tudo certo! Abrindo o WhatsApp para finalizar o envio…';
