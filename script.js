@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       platform: 'TikTok',
       tone: 'ph-tone-2',
       video: 'videos/video6.mp4',
+      thumbnail: 'imagens/otimizadas/foto7.webp',
       description: 'Vídeo de campanha.'
     },
     {
@@ -203,16 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
       description: 'Vídeo de campanha.'
     },
     {
-      id: 20,
-      title: 'Editável',
-      category: 'ads',
-      categoryLabel: 'Anúncio',
-      platform: 'TikTok Ads',
-      tone: 'ph-tone-2',
-      video: 'videos/video8.mp4',
-      description: 'Vídeo de campanha.'
-    },
-    {
       id: 21,
       title: 'Creme Elseve',
       category: 'beleza',
@@ -309,70 +300,108 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================== */
   const portfolioGrid = document.getElementById('portfolioGrid');
 
-  function renderPortfolio(items) {
-  portfolioGrid.innerHTML = items.map(item => `
-    <article
-      class="portfolio-card reveal is-visible"
-      data-category="${item.category}"
-      data-id="${item.id}"
-      tabindex="0"
-      role="button"
-      aria-label="Assistir: ${item.title}">
+  // Ícones usados nos cards (mesmo estilo do play dos Reels)
+  const ICON_PLAY = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
+  const ICON_ZOOM = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>';
 
-      <div class="portfolio-card-media">
-        <video
-          class="portfolio-card-video"
-          src="${item.video}"
-          muted
-          playsinline
-          preload="metadata">
-        </video>
-
-        <span class="portfolio-card-play">▶</span>
-      </div>
-
-      <div class="portfolio-card-body">
-        <span class="portfolio-card-category">${item.categoryLabel}</span>
-        <h3 class="portfolio-card-title">${item.title}</h3>
-        <span class="portfolio-card-watch">Assistir ▶</span>
-      </div>
-
-    </article>
-  `).join('');
-
-  portfolioGrid.querySelectorAll('.portfolio-card').forEach(card => {
-    card.addEventListener('click', () => openVideoModal(card.dataset.id));
-
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openVideoModal(card.dataset.id);
-      }
+  // Cards clicáveis: clique, Enter e Espaço abrem o modal
+  function bindCardActivation(grid, onOpen) {
+    grid.querySelectorAll('.portfolio-card').forEach(card => {
+      card.addEventListener('click', () => onOpen(card.dataset.id));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen(card.dataset.id);
+        }
+      });
     });
-  });
-}
+  }
+
+  function renderPortfolio(items) {
+    portfolioGrid.innerHTML = items.map(item => `
+      <article
+        class="portfolio-card"
+        data-category="${item.category}"
+        data-id="${item.id}"
+        tabindex="0"
+        role="button"
+        aria-label="Assistir: ${item.title}">
+
+        <div class="portfolio-card-media">
+          <video
+            class="portfolio-card-video"
+            data-src="${item.video}#t=0.1"
+            ${item.thumbnail ? `poster="${item.thumbnail}"` : ''}
+            muted
+            playsinline
+            preload="none"
+            tabindex="-1"
+            aria-hidden="true">
+          </video>
+          <span class="portfolio-card-play">${ICON_PLAY}</span>
+        </div>
+
+        <div class="portfolio-card-body">
+          <span class="portfolio-card-category">${item.categoryLabel}</span>
+          <h3 class="portfolio-card-title">${item.title}</h3>
+          <span class="portfolio-card-watch">Assistir ${ICON_PLAY}</span>
+        </div>
+
+      </article>
+    `).join('');
+
+    bindCardActivation(portfolioGrid, openVideoModal);
+  }
 
   renderPortfolio(portfolioItems);
 
+  /* Prévia dos vídeos sob demanda: o arquivo só começa a ser baixado
+     quando o card se aproxima da tela (são ~30 vídeos pesados). O "#t=0.1"
+     faz o navegador exibir o primeiro quadro em vez de uma tela preta. */
+  const previewVideos = portfolioGrid.querySelectorAll('video[data-src]');
+
+  function loadPreview(video) {
+    video.preload = 'metadata';
+    video.src = video.dataset.src;
+    video.removeAttribute('data-src');
+  }
+
+  if ('IntersectionObserver' in window) {
+    const previewObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        loadPreview(entry.target);
+        previewObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '300px 0px' });
+    previewVideos.forEach(v => previewObserver.observe(v));
+  } else {
+    previewVideos.forEach(loadPreview);
+  }
+
   /* ==========================================================
-     3. FILTRO DO PORTFÓLIO
+     3. FILTROS (Portfólio e Fotos)
      ========================================================== */
-  const filterButtons = document.querySelectorAll('#portfolioFilters .filter-btn');
+  function setupFilters(filtersId, grid) {
+    const buttons = document.querySelectorAll(`#${filtersId} .filter-btn`);
 
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => {
+          b.classList.toggle('is-active', b === btn);
+          b.setAttribute('aria-pressed', String(b === btn));
+        });
 
-      const filter = btn.dataset.filter;
-      const cards = portfolioGrid.querySelectorAll('.portfolio-card');
-
-      cards.forEach(card => {
-        const match = filter === 'todos' || card.dataset.category === filter;
-        card.classList.toggle('is-hidden', !match);
+        const filter = btn.dataset.filter;
+        grid.querySelectorAll('.portfolio-card').forEach(card => {
+          const match = filter === 'todos' || card.dataset.category === filter;
+          card.classList.toggle('is-hidden', !match);
+        });
       });
     });
-  });
+  }
+
+  setupFilters('portfolioFilters', portfolioGrid);
 
   /* ==========================================================
      4. MODAL DE VÍDEO
@@ -402,6 +431,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     lastFocusedEl = null;
   }
+
+  // Mantém o Tab dentro do modal aberto (botão fechar ↔ controles do vídeo)
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const modal = document.querySelector('.media-modal.is-open');
+    if (!modal) return;
+
+    const focusables = [...modal.querySelectorAll('button, video[controls]')]
+      .filter(el => el.offsetParent !== null);
+    if (!focusables.length) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !modal.contains(document.activeElement))) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || !modal.contains(document.activeElement))) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
 
   function openVideoModal(id) {
     const item = portfolioItems.find(v => String(v.id) === String(id));
@@ -532,65 +582,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const fotosGrid = document.getElementById('fotosGrid');
 
- function renderPhotos(items) {
-  fotosGrid.innerHTML = items.map(item => `
-    <article
-      class="portfolio-card reveal is-visible"
-      data-category="${item.category}"
-      data-id="${item.id}"
-      tabindex="0"
-      role="button"
-      aria-label="Ver: ${item.title}"
-    >
+  // No grid usa a versão otimizada (imagens/otimizadas/*.webp); o modal abre o original
+  const thumbOf = (url) => url.replace(/^imagens\/(.+)\.\w+$/, 'imagens/otimizadas/$1.webp');
 
-      <div class="portfolio-card-media">
-        <img
-          src="${item.imageUrl}"
-          alt="${item.title}"
-          class="portfolio-card-image"
-          loading="lazy"
-        >
-        <span class="portfolio-card-play">🔍</span>
-      </div>
+  function renderPhotos(items) {
+    fotosGrid.innerHTML = items.map(item => `
+      <article
+        class="portfolio-card"
+        data-category="${item.category}"
+        data-id="${item.id}"
+        tabindex="0"
+        role="button"
+        aria-label="Ver foto: ${item.title}">
 
-      <div class="portfolio-card-body">
-        <span class="portfolio-card-category">${item.categoryLabel}</span>
-        <h3 class="portfolio-card-title">${item.title}</h3>
-        <span class="portfolio-card-watch">Ver 🔍</span>
-      </div>
+        <div class="portfolio-card-media">
+          <img
+            src="${thumbOf(item.imageUrl)}"
+            alt=""
+            class="portfolio-card-image"
+            width="720" height="1280"
+            loading="lazy"
+            decoding="async"
+            onerror="this.onerror=null;this.src='${item.imageUrl}'">
+          <span class="portfolio-card-play">${ICON_ZOOM}</span>
+        </div>
 
-    </article>
-  `).join('');
+        <div class="portfolio-card-body">
+          <span class="portfolio-card-category">${item.categoryLabel}</span>
+          <h3 class="portfolio-card-title">${item.title}</h3>
+          <span class="portfolio-card-watch">Ver ${ICON_ZOOM}</span>
+        </div>
 
-  fotosGrid.querySelectorAll('.portfolio-card').forEach(card => {
-    card.addEventListener('click', () => openPhotoModal(card.dataset.id));
+      </article>
+    `).join('');
 
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openPhotoModal(card.dataset.id);
-      }
-    });
-  });
-}
+    bindCardActivation(fotosGrid, openPhotoModal);
+  }
+
   renderPhotos(photoItems);
-
-  const fotosFilterButtons = document.querySelectorAll('#fotosFilters .filter-btn');
-
-  fotosFilterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      fotosFilterButtons.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-
-      const filter = btn.dataset.filter;
-      const cards = fotosGrid.querySelectorAll('.portfolio-card');
-
-      cards.forEach(card => {
-        const match = filter === 'todos' || card.dataset.category === filter;
-        card.classList.toggle('is-hidden', !match);
-      });
-    });
-  });
+  setupFilters('fotosFilters', fotosGrid);
 
   const photoModal = document.getElementById('photoModal');
   const photoModalBackdrop = document.getElementById('photoModalBackdrop');
@@ -619,20 +649,6 @@ document.addEventListener('DOMContentLoaded', () => {
   photoModalBackdrop.addEventListener('click', closePhotoModal);
   photoModalClose.addEventListener('click', closePhotoModal);
 
-  // Clicar na área vazia ao redor da mídia também fecha
-  document.querySelectorAll('.media-modal-stage').forEach(stage => {
-    stage.addEventListener('click', (e) => {
-      if (e.target !== stage) return;
-      closeVideoModal();
-      closePhotoModal();
-    });
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    closeVideoModal();
-    closePhotoModal();
-  });
 
   /* ==========================================================
      4C. MATERIAL DE TRABALHO
@@ -668,44 +684,35 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderEquipment(items) {
     equipmentGrid.innerHTML = items.map(item => `
       <article
-        class="portfolio-card equipment-card reveal is-visible"
+        class="portfolio-card equipment-card"
         data-id="${item.id}"
         tabindex="0"
         role="button"
-        aria-label="Ver: ${item.title}"
-      >
+        aria-label="Ver equipamento: ${item.title}">
         <div class="ph ${item.tone}"></div>
         <img
           src="${item.imageUrl}"
-          alt="${item.title}"
+          alt=""
           class="equipment-card-img"
           loading="lazy"
-        >
-        <span class="portfolio-card-play">🔍</span>
+          decoding="async">
+        <span class="portfolio-card-play">${ICON_ZOOM}</span>
 
         <div class="portfolio-card-body">
           <span class="portfolio-card-category">Equipamento</span>
           <h3 class="portfolio-card-title">${item.title}</h3>
           <p class="equipment-card-desc">${item.description}</p>
-          <span class="portfolio-card-watch">Ver 🔍</span>
+          <span class="portfolio-card-watch">Ver ${ICON_ZOOM}</span>
         </div>
       </article>
     `).join('');
 
-    equipmentGrid.querySelectorAll('.equipment-card').forEach(card => {
-      // Enquanto a foto não existir na pasta, o placeholder (.ph) fica visível
-      const img = card.querySelector('.equipment-card-img');
+    // Enquanto a foto não existir na pasta, o placeholder (.ph) fica visível
+    equipmentGrid.querySelectorAll('.equipment-card-img').forEach(img => {
       img.addEventListener('error', () => img.classList.add('is-missing'));
-
-      card.addEventListener('click', () => openEquipmentModal(card.dataset.id));
-
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openEquipmentModal(card.dataset.id);
-        }
-      });
     });
+
+    bindCardActivation(equipmentGrid, openEquipmentModal);
   }
 
   renderEquipment(equipmentItems);
@@ -745,17 +752,23 @@ document.addEventListener('DOMContentLoaded', () => {
   equipmentModalBackdrop.addEventListener('click', closeEquipmentModal);
   equipmentModalClose.addEventListener('click', closeEquipmentModal);
 
-  equipmentModal.querySelector('.media-modal-stage').addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeEquipmentModal();
-  });
+  function closeAllModals() {
+    closeVideoModal();
+    closePhotoModal();
+    closeEquipmentModal();
+  }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeEquipmentModal();
+  // Clicar na área vazia ao redor da mídia também fecha
+  document.querySelectorAll('.media-modal-stage').forEach(stage => {
+    stage.addEventListener('click', (e) => {
+      if (e.target === stage) closeAllModals();
+    });
   });
 
   /* ==========================================================
      5. HEADER: estado ao rolar + progresso de scroll
      ========================================================== */
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const siteHeader = document.getElementById('siteHeader');
   const scrollProgress = document.getElementById('scrollProgress');
   const backToTop = document.getElementById('backToTop');
@@ -766,15 +779,15 @@ document.addEventListener('DOMContentLoaded', () => {
     backToTop.classList.toggle('is-visible', scrollY > 600);
 
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
-    scrollProgress.style.width = progress + '%';
+    const progress = docHeight > 0 ? scrollY / docHeight : 0;
+    scrollProgress.style.transform = `scaleX(${progress})`;
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
   backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   });
 
   /* ==========================================================
@@ -785,9 +798,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function toggleMobileMenu(forceClose) {
     const isOpen = forceClose ? false : !mobileNavOverlay.classList.contains('is-open');
+    if (isOpen === mobileNavOverlay.classList.contains('is-open')) return;
+
     mobileNavOverlay.classList.toggle('is-open', isOpen);
+    siteHeader.classList.toggle('menu-open', isOpen);
     menuToggle.classList.toggle('is-active', isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
     document.body.style.overflow = isOpen ? 'hidden' : '';
   }
 
@@ -796,114 +813,45 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', () => toggleMobileMenu(true));
   });
 
+  // Se a tela crescer com o menu aberto (ex.: girar o tablet), fecha o overlay
+  window.matchMedia('(min-width: 1101px)').addEventListener('change', (e) => {
+    if (e.matches) toggleMobileMenu(true);
+  });
+
+  // Esc fecha qualquer modal ou o menu mobile
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (mobileNavOverlay.classList.contains('is-open')) {
+      toggleMobileMenu(true);
+      menuToggle.focus();
+      return;
+    }
+    closeAllModals();
+  });
+
   /* ==========================================================
      7. SCROLL REVEAL (IntersectionObserver)
      ========================================================== */
   const revealEls = document.querySelectorAll('.reveal');
 
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const delay = entry.target.dataset.revealDelay || 0;
-        setTimeout(() => entry.target.classList.add('is-visible'), Number(delay));
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.dataset.revealDelay || 0;
+          setTimeout(() => entry.target.classList.add('is-visible'), Number(delay));
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
 
-  revealEls.forEach(el => revealObserver.observe(el));
-
-  /* ==========================================================
-     8. CONTADORES ANIMADOS (seção Resultados)
-     ========================================================== */
-  const resultNumbers = document.querySelectorAll('.result-number');
-
-  function animateCount(el) {
-    const target = parseFloat(el.dataset.count);
-    const suffix = el.dataset.suffix || '';
-    const decimals = Number(el.dataset.decimals || 0);
-    const duration = 1600;
-    const start = performance.now();
-
-    function formatNumber(value) {
-      if (decimals > 0) return value.toFixed(decimals);
-      return Math.round(value).toLocaleString('pt-BR');
-    }
-
-    function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cúbico
-      const current = target * eased;
-      el.textContent = formatNumber(current) + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
+    revealEls.forEach(el => revealObserver.observe(el));
   }
 
-  const countObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCount(entry.target);
-        countObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  resultNumbers.forEach(el => countObserver.observe(el));
-
   /* ==========================================================
-     9. FAQ ACCORDION
-     ========================================================== */
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    question.addEventListener('click', () => {
-      const isOpen = item.classList.contains('is-open');
-      faqItems.forEach(i => i.classList.remove('is-open'));
-      if (!isOpen) item.classList.add('is-open');
-    });
-  });
-
-  /* ==========================================================
-     10. CARROSSEL DE DEPOIMENTOS
-     ========================================================== */
-  const testimonialsTrack = document.getElementById('testimonialsTrack');
-  const testimonialCards = document.querySelectorAll('.testimonial-card');
-  const testimonialPrev = document.getElementById('testimonialPrev');
-  const testimonialNext = document.getElementById('testimonialNext');
-  const testimonialsDots = document.getElementById('testimonialsDots');
-
-  let currentTestimonial = 0;
-
-  testimonialCards.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.setAttribute('aria-label', `Ir para depoimento ${i + 1}`);
-    if (i === 0) dot.classList.add('is-active');
-    dot.addEventListener('click', () => goToTestimonial(i));
-    testimonialsDots.appendChild(dot);
-  });
-
-  function goToTestimonial(index) {
-    currentTestimonial = (index + testimonialCards.length) % testimonialCards.length;
-    testimonialsTrack.style.transform = `translateX(-${currentTestimonial * 100}%)`;
-    testimonialsDots.querySelectorAll('button').forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === currentTestimonial);
-    });
-  }
-
-  testimonialPrev.addEventListener('click', () => goToTestimonial(currentTestimonial - 1));
-  testimonialNext.addEventListener('click', () => goToTestimonial(currentTestimonial + 1));
-
-  let testimonialAutoplay = setInterval(() => goToTestimonial(currentTestimonial + 1), 6500);
-  const testimonialsWrap = document.querySelector('.testimonials-wrap');
-  testimonialsWrap.addEventListener('mouseenter', () => clearInterval(testimonialAutoplay));
-  testimonialsWrap.addEventListener('mouseleave', () => {
-    testimonialAutoplay = setInterval(() => goToTestimonial(currentTestimonial + 1), 6500);
-  });
-
-  /* ==========================================================
-     11. FORMULÁRIO DE CONTATO
+     8. FORMULÁRIO DE CONTATO
      Sem backend: valida os campos e abre o WhatsApp com a
      mensagem pré-preenchida. Troque o número em "whatsappNumber".
      ========================================================== */
@@ -931,31 +879,17 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const texto = `Olá, Daniella! Meu nome é ${nome} e represento a marca ${marca}.%0A%0A` +
-      `Email: ${email}%0ATipo de conteúdo desejado: ${tipo}%0A%0AMensagem: ${mensagem}`;
+    const texto = `Olá, Daniella! Meu nome é ${nome} e represento a marca ${marca}.\n\n` +
+      `Email: ${email}\nTipo de conteúdo desejado: ${tipo}\n\nMensagem: ${mensagem}`;
 
     formNote.textContent = 'Tudo certo! Abrindo o WhatsApp para finalizar o envio…';
-    window.open(`https://wa.me/${whatsappNumber}?text=${texto}`, '_blank');
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
 
     contactForm.reset();
     setTimeout(() => { formNote.textContent = ''; }, 6000);
   });
 
-  /* ==========================================================
-     12. SMOOTH SCROLL COM OFFSET DO HEADER
-     ========================================================== */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      if (targetId.length <= 1) return;
-      const target = document.querySelector(targetId);
-      if (!target) return;
-
-      e.preventDefault();
-      const headerOffset = 90;
-      const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
-      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-    });
-  });
+  /* A rolagem suave até as âncoras com desconto do header fixo é feita
+     no CSS (scroll-behavior + scroll-padding-top em html). */
 
 });

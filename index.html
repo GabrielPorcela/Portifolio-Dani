@@ -5,78 +5,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniella Abreu — UGC Creator</title>
 <meta name="description" content="Daniella Abreu, UGC Creator especializada em Educação Física, Beleza e Moda. Conteúdo autêntico que gera resultado para marcas.">
+<meta name="theme-color" content="#FBF4F1">
+<!-- Sem favicon próprio ainda: evita o erro 404 de /favicon.ico no console -->
+<link rel="icon" href="data:,">
+
+<!-- Compartilhamento (WhatsApp, Instagram, LinkedIn etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Daniella Abreu — UGC Creator">
+<meta property="og:description" content="Vídeos e fotos UGC autênticos para marcas de Educação Física, Beleza e Moda.">
 
 <!-- Fontes: Fraunces (display), Manrope (corpo), Jost (rótulos) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 
-<link rel="preload" as="image" href="imagens/foto-inicio.png">
+<link rel="preload" as="image" href="imagens/otimizadas/foto-inicio.webp" type="image/webp">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- ============================================= -->
-<!-- CURSOR / PROGRESS BAR DE SCROLL                -->
+<!-- 1. CURSOR / PROGRESS BAR DE SCROLL                -->
 <!-- ============================================= -->
-<div class="scroll-progress" id="scrollProgress"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- ============================================= -->
-<!-- HEADER                                         -->
+<!-- 2. HEADER                                         -->
 <!-- ============================================= -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="#topo" class="logo">Daniella <span>Abreu</span></a>
 
-    <nav class="main-nav" id="mainNav">
+    <nav class="main-nav" id="mainNav" aria-label="Navegação principal">
       <ul>
         <li><a href="#sobre" class="nav-link">Sobre</a></li>
         <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
         <li><a href="#equipamentos" class="nav-link">Equipamentos</a></li>
+        <li><a href="#reels" class="nav-link">Reels</a></li>
         <li><a href="#servicos" class="nav-link">Serviços</a></li>
-        <li><a href="#resultados" class="nav-link">Resultados</a></li>
-        <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+        <li><a href="#marcas" class="nav-link">Marcas</a></li>
         <li><a href="#investimento" class="nav-link">Investimento</a></li>
         <li><a href="#contato" class="nav-link">Contato</a></li>
       </ul>
       <a href="#contato" class="btn btn-primary btn-small">Solicitar orçamento</a>
     </nav>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNavOverlay">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<!-- overlay do menu mobile -->
-<div class="mobile-nav-overlay" id="mobileNavOverlay">
+<!-- overlay do menu mobile (mesmos destinos do menu principal + Fotos) -->
+<nav class="mobile-nav-overlay" id="mobileNavOverlay" aria-label="Menu">
   <ul>
     <li><a href="#sobre" class="nav-link">Sobre</a></li>
     <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
+    <li><a href="#fotos" class="nav-link">Fotos</a></li>
     <li><a href="#equipamentos" class="nav-link">Equipamentos</a></li>
+    <li><a href="#reels" class="nav-link">Reels</a></li>
     <li><a href="#servicos" class="nav-link">Serviços</a></li>
-    <li><a href="#resultados" class="nav-link">Resultados</a></li>
-    <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
-    <li><a href="#processo" class="nav-link">Processo</a></li>
-    <li><a href="#faq" class="nav-link">FAQ</a></li>
+    <li><a href="#marcas" class="nav-link">Marcas</a></li>
     <li><a href="#investimento" class="nav-link">Investimento</a></li>
     <li><a href="#contato" class="nav-link">Contato</a></li>
   </ul>
   <a href="#contato" class="btn btn-primary">Solicitar orçamento</a>
-</div>
+</nav>
 
 <main id="topo">
 
 <!-- ============================================= -->
-<!-- 1. HERO                                        -->
+<!-- 3. HERO                                        -->
 <!-- ============================================= -->
 <section class="hero">
 
   <div class="hero-background">
-    <img src="imagens/foto-inicio.png" alt="Daniella Abreu" fetchpriority="high" decoding="sync">
+    <picture>
+      <source srcset="imagens/otimizadas/foto-inicio.webp" type="image/webp">
+      <img src="imagens/foto-inicio.png" alt="Daniella Abreu sorrindo, sentada em um deck de madeira" width="1537" height="1023" fetchpriority="high" decoding="sync">
+    </picture>
   </div>
 
-  <div class="hero-overlay"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
 
   <div class="hero-content">
 
@@ -85,8 +96,8 @@
     </span>
 
     <h1 class="hero-title">
-      Conteúdo que parece <em>real</em><br>
-      porque <em>é</em> real —<br>
+      Conteúdo que parece <em>real</em><br class="br-desktop">
+      porque <em>é</em> real —<br class="br-desktop">
       e vende.
     </h1>
 
@@ -107,26 +118,29 @@
 
   </div>
 
-  <div class="scroll-cue">
+  <div class="scroll-cue" aria-hidden="true">
     <span></span>
     role para explorar
   </div>
 
 </section>
 <!-- ============================================= -->
-<!-- 2. SOBRE                                       -->
+<!-- 4. SOBRE                                       -->
 <!-- ============================================= -->
 <section class="section" id="sobre">
   <div class="container about-grid">
 
     <div class="about-visual reveal">
       <div class="photo-frame">
-      <img src="imagens/foto-secao2.png" alt="Foto de Daniella" loading="lazy" decoding="async">
-    </div>
+        <picture>
+          <source srcset="imagens/otimizadas/foto-secao2.webp" type="image/webp">
+          <img src="imagens/foto-secao2.png" alt="Retrato de Daniella Abreu sorrindo" width="408" height="612" loading="lazy" decoding="async">
+        </picture>
+      </div>
 
-    <div class="about-tag">
-      <strong>5 anos</strong>
-      <span>criando conteúdo para marcas</span>
+      <div class="about-tag">
+        <strong>5 anos</strong>
+        <span>criando conteúdo para marcas</span>
       </div>
     </div>
 
@@ -134,7 +148,7 @@
       <span class="eyebrow reveal">Sobre mim</span>
       <h2 class="section-title reveal">Quem sou</h2>
       <p class="reveal">
-        Estudante de educação física, iniciante na natação,cristã e casada.
+        Estudante de educação física, iniciante na natação, cristã e casada.
         Sou professora de formação com isso tenho uma boa comunicação na qual eu conheci o UGC, transformando vídeos em conversão de vendas.
         Confiar na Daniella para criar conteúdos da sua marca é essencial para garantir alta qualidade, identificação e conversar com seu público alvo. 
       </p>
@@ -154,7 +168,7 @@
 </section>
 
 <!-- ============================================= -->
-<!-- 3. PORTFÓLIO                                   -->
+<!-- 5. PORTFÓLIO                                   -->
 <!-- ============================================= -->
 <section class="section" id="portfolio">
   <div class="container">
@@ -164,13 +178,13 @@
       Uma seleção de conteúdos entregues. Em breve com integração direta ao Instagram, TikTok e YouTube.
     </p>
 
-    <div class="portfolio-filters reveal" id="portfolioFilters">
-      <button class="filter-btn is-active" data-filter="todos">Todos</button>
-      <button class="filter-btn" data-filter="educacao-fisica">Educação Física</button>
-      <button class="filter-btn" data-filter="beleza">Beleza</button>
-      <button class="filter-btn" data-filter="moda">Moda</button>
-      <button class="filter-btn" data-filter="acessorios">Acessórios</button>
-      <button class="filter-btn" data-filter="gastronomia">Gastronomia</button>
+    <div class="portfolio-filters reveal" id="portfolioFilters" role="group" aria-label="Filtrar vídeos por categoria">
+      <button type="button" class="filter-btn is-active" data-filter="todos" aria-pressed="true">Todos</button>
+      <button type="button" class="filter-btn" data-filter="educacao-fisica" aria-pressed="false">Educação Física</button>
+      <button type="button" class="filter-btn" data-filter="beleza" aria-pressed="false">Beleza</button>
+      <button type="button" class="filter-btn" data-filter="moda" aria-pressed="false">Moda</button>
+      <button type="button" class="filter-btn" data-filter="acessorios" aria-pressed="false">Acessórios</button>
+      <button type="button" class="filter-btn" data-filter="gastronomia" aria-pressed="false">Gastronomia</button>
     </div>
 
     <div class="portfolio-grid" id="portfolioGrid">
@@ -182,7 +196,7 @@
 <!-- Modal de vídeo (placeholder para futura integração) -->
 <div class="video-modal media-modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vídeo do portfólio">
   <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
-  <button class="video-modal-close" id="videoModalClose" aria-label="Fechar">&times;</button>
+  <button type="button" class="video-modal-close" id="videoModalClose" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
   <div class="media-modal-stage">
     <video
       id="videoPlayer"
@@ -196,7 +210,7 @@
 </div>
 
 <!-- ============================================= -->
-<!-- 4B. FOTOS                                       -->
+<!-- 6. FOTOS                                       -->
 <!-- ============================================= -->
 <section class="section" id="fotos">
   <div class="container">
@@ -206,10 +220,10 @@
       Uma seleção de fotos entregues. Em breve com integração direta ao Instagram, TikTok e YouTube.
     </p>
 
-    <div class="portfolio-filters reveal" id="fotosFilters">
-      <button class="filter-btn is-active" data-filter="todos">Todos</button>
-      <button class="filter-btn" data-filter="beleza">Beleza</button>
-      <button class="filter-btn" data-filter="moda">Moda</button>
+    <div class="portfolio-filters reveal" id="fotosFilters" role="group" aria-label="Filtrar fotos por categoria">
+      <button type="button" class="filter-btn is-active" data-filter="todos" aria-pressed="true">Todos</button>
+      <button type="button" class="filter-btn" data-filter="beleza" aria-pressed="false">Beleza</button>
+      <button type="button" class="filter-btn" data-filter="moda" aria-pressed="false">Moda</button>
     </div>
 
     <div class="portfolio-grid" id="fotosGrid">
@@ -221,14 +235,14 @@
 <!-- Modal de foto (placeholder para futura integração) -->
 <div class="video-modal media-modal" id="photoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Foto do portfólio">
   <div class="video-modal-backdrop" id="photoModalBackdrop"></div>
-  <button class="video-modal-close" id="photoModalClose" aria-label="Fechar">&times;</button>
+  <button type="button" class="video-modal-close" id="photoModalClose" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
   <div class="media-modal-stage">
     <img class="media-modal-img" id="photoModalThumb" alt="">
   </div>
 </div>
 
 <!-- ============================================= -->
-<!-- 4C. MATERIAL DE TRABALHO                      -->
+<!-- 7. MATERIAL DE TRABALHO                      -->
 <!-- ============================================= -->
 <section class="section" id="equipamentos">
   <div class="container">
@@ -247,7 +261,7 @@
 <!-- Modal de equipamento -->
 <div class="video-modal media-modal" id="equipmentModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Foto do equipamento">
   <div class="video-modal-backdrop" id="equipmentModalBackdrop"></div>
-  <button class="video-modal-close" id="equipmentModalClose" aria-label="Fechar">&times;</button>
+  <button type="button" class="video-modal-close" id="equipmentModalClose" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
   <div class="media-modal-stage">
     <img class="media-modal-img" id="equipmentModalImg" alt="">
     <div class="ph equipment-modal-ph" data-ph="Foto em breve"></div>
@@ -255,7 +269,7 @@
 </div>
 
 <!-- ============================================= -->
-<!-- 4D. REELS DE SUCESSO                           -->
+<!-- 8. REELS DE SUCESSO                           -->
 <!-- ============================================= -->
 <section class="section section-alt" id="reels">
   <div class="container">
@@ -273,19 +287,17 @@
     -->
     <div class="reels-grid">
 
-      <!-- REEL 1 — vídeo: videos/video17.mp4 | views: ALTERAR -->
+      <!-- REEL 1 — vídeo: videos/video30.mp4 -->
       <div class="reel-card reveal">
         <button
           type="button"
           class="reel-card-media"
           data-video="videos/video30.mp4"
           aria-label="Assistir reel Blessed Choice">
-          <img
-            src="imagens/foto.blessed.reel.jpg"
-            alt="Capa do reel Blessed Choice"
-            class="reel-card-img"
-            loading="lazy"
-          >
+          <picture>
+            <source srcset="imagens/otimizadas/foto.blessed.reel.webp" type="image/webp">
+            <img src="imagens/foto.blessed.reel.jpg" alt="Capa do reel Blessed Choice" class="reel-card-img" width="720" height="1279" loading="lazy" decoding="async">
+          </picture>
           <span class="reel-card-play"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>
           <span class="reel-card-views">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -295,19 +307,17 @@
         </button>
       </div>
 
-      <!-- REEL 2 — vídeo: videos/video17.mp4 | views: ALTERAR -->
+      <!-- REEL 2 — vídeo: videos/video17.mp4 -->
       <div class="reel-card reveal" data-reveal-delay="100">
         <button
           type="button"
           class="reel-card-media"
           data-video="videos/video17.mp4"
-          aria-label="Assistir reel Blessed Choice">
-          <img
-            src="imagens/foto.blessed2.reel.jpg"
-            alt="Capa do reel Blessed Choice"
-            class="reel-card-img"
-            loading="lazy"
-          >
+          aria-label="Assistir segundo reel Blessed Choice">
+          <picture>
+            <source srcset="imagens/otimizadas/foto.blessed2.reel.webp" type="image/webp">
+            <img src="imagens/foto.blessed2.reel.jpg" alt="Capa do reel Blessed Choice" class="reel-card-img" width="720" height="1279" loading="lazy" decoding="async">
+          </picture>
           <span class="reel-card-play"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>
           <span class="reel-card-views">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -317,19 +327,17 @@
         </button>
       </div>
 
-      <!-- REEL 3 — vídeo: videos/video20.mp4 | views: ALTERAR -->
+      <!-- REEL 3 — vídeo: videos/video20.mp4 -->
       <div class="reel-card reveal" data-reveal-delay="200">
         <button
           type="button"
           class="reel-card-media"
           data-video="videos/video20.mp4"
           aria-label="Assistir reel Use e Poder">
-          <img
-            src="imagens/foto.use.reel.png"
-            alt="Capa do reel Use e Poder"
-            class="reel-card-img"
-            loading="lazy"
-          >
+          <picture>
+            <source srcset="imagens/otimizadas/foto.use.reel.webp" type="image/webp">
+            <img src="imagens/foto.use.reel.png" alt="Capa do reel Use e Poder" class="reel-card-img" width="720" height="1216" loading="lazy" decoding="async">
+          </picture>
           <span class="reel-card-play"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>
           <span class="reel-card-views">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -344,7 +352,7 @@
 </section>
 
 <!-- ============================================= -->
-<!-- 5. SERVIÇOS                                    -->
+<!-- 9. SERVIÇOS                                    -->
 <!-- ============================================= -->
 <section class="section section-alt" id="servicos">
   <div class="container">
@@ -354,49 +362,49 @@
     <div class="services-grid">
 
       <div class="service-card reveal">
-        <span class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="14" width="24" height="20" rx="3"/><path d="M30 20l12-6v20l-12-6z"/></svg></span>
+        <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="14" width="24" height="20" rx="3"/><path d="M30 20l12-6v20l-12-6z"/></svg></span>
         <h3>Vídeos UGC</h3>
         <p>Conteúdo em formato vertical, gravado e editado para parecer 100% orgânico.</p>
       </div>
 
       <div class="service-card reveal" data-reveal-delay="60">
-        <span class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="14" width="36" height="24" rx="3"/><circle cx="24" cy="26" r="7"/><path d="M17 14l3-5h8l3 5"/></svg></span>
+        <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="14" width="36" height="24" rx="3"/><circle cx="24" cy="26" r="7"/><path d="M17 14l3-5h8l3 5"/></svg></span>
         <h3>Fotos</h3>
         <p>Still de produto e lifestyle com direção de arte alinhada à identidade da marca.</p>
       </div>
 
       <div class="service-card reveal" data-reveal-delay="120">
-        <span class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M24 6l5.4 11.4L42 19.2l-9 8.8 2.1 12.6L24 34.8l-11.1 5.8L15 27.9l-9-8.7 12.6-1.9z"/></svg></span>
+        <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M24 6l5.4 11.4L42 19.2l-9 8.8 2.1 12.6L24 34.8l-11.1 5.8L15 27.9l-9-8.7 12.6-1.9z"/></svg></span>
         <h3>Reviews</h3>
         <p>Avaliação sincera de produto, destacando benefícios reais de uso.</p>
       </div>
 
       <div class="service-card reveal" data-reveal-delay="180">
-        <span class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="18" width="34" height="22" rx="2"/><path d="M7 26h34"/><path d="M24 18v22"/><path d="M24 18c-3-8-15-8-14 0 0 0 6 0 14 0z"/><path d="M24 18c3-8 15-8 14 0 0 0-6 0-14 0z"/></svg></span>
+        <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="18" width="34" height="22" rx="2"/><path d="M7 26h34"/><path d="M24 18v22"/><path d="M24 18c-3-8-15-8-14 0 0 0 6 0 14 0z"/><path d="M24 18c3-8 15-8 14 0 0 0-6 0-14 0z"/></svg></span>
         <h3>Unboxing</h3>
         <p>Abertura de produto com reação genuína — ótimo gancho para topo de funil.</p>
       </div>
 
       <div class="service-card reveal" data-reveal-delay="0">
-        <span class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 36V14a4 4 0 014-4h24a4 4 0 014 4v14a4 4 0 01-4 4H18l-8 8z"/><path d="M15 18h18"/><path d="M15 24h11"/></svg></span>
+        <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 36V14a4 4 0 014-4h24a4 4 0 014 4v14a4 4 0 01-4 4H18l-8 8z"/><path d="M15 18h18"/><path d="M15 24h11"/></svg></span>
         <h3>Storytelling</h3>
         <p>Narrativa em vídeo que conecta a marca a uma experiência pessoal real.</p>
       </div>
 
       <div class="service-card reveal" data-reveal-delay="60">
-        <span class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="10" width="36" height="24" rx="3"/><path d="M6 18h36"/><circle cx="14" cy="14" r="1.4" fill="currentColor" stroke="none"/><path d="M17 30l6-8 5 6 5-9 4 11"/></svg></span>
+        <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="10" width="36" height="24" rx="3"/><path d="M6 18h36"/><circle cx="14" cy="14" r="1.4" fill="currentColor" stroke="none"/><path d="M17 30l6-8 5 6 5-9 4 11"/></svg></span>
         <h3>Vídeos para anúncios</h3>
         <p>Roteiro e ritmo pensados para performar como anúncio pago, não só como post.</p>
       </div>
 
       <div class="service-card reveal" data-reveal-delay="120">
-        <span class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="30" height="30" rx="5"/><path d="M20 19l10 5-10 5z"/></svg></span>
+        <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="30" height="30" rx="5"/><path d="M20 19l10 5-10 5z"/></svg></span>
         <h3>Conteúdo para Reels</h3>
         <p>Vídeos curtos e dinâmicos otimizados para o algoritmo de Reels.</p>
       </div>
 
       <div class="service-card reveal" data-reveal-delay="180">
-        <span class="service-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 20v8a2 2 0 002 2h4l18 8V10L12 18H8a2 2 0 00-2 2z"/><path d="M30 18a6 6 0 010 12"/></svg></span>
+        <span class="service-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 20v8a2 2 0 002 2h4l18 8V10L12 18H8a2 2 0 00-2 2z"/><path d="M30 18a6 6 0 010 12"/></svg></span>
         <h3>TikTok Ads &amp; Meta Ads</h3>
         <p>Criativos nativos de plataforma, testados em diferentes ganchos e formatos.</p>
       </div>
@@ -407,9 +415,9 @@
 
 
 <!-- ============================================= -->
-<!-- 7. MARCAS                                      -->
+<!-- 10. MARCAS                                      -->
 <!-- ============================================= -->
-<section class="section section-alt brands-section">
+<section class="section section-alt brands-section" id="marcas">
   <div class="container">
     <span class="eyebrow reveal center">Já colaborei com</span>
     <h2 class="section-title center reveal">Marcas</h2>
@@ -417,80 +425,25 @@
 
   <div class="brands-marquee reveal">
     <div class="brands-track">
-      <img class="brand-logo" src="imagens/logo.loreal.png" alt="L'Oréal">
-      <img class="brand-logo brand-logo--tall" src="imagens/logo.ds.png" alt="DS">
-      <img class="brand-logo brand-logo--tall" src="imagens/logo.cristina.png" alt="Cristina">
-      <img class="brand-logo" src="imagens/logo.organ.jpg" alt="Organ">
-      <img class="brand-logo brand-logo--wide" src="imagens/logo.garnier.png" alt="Garnier">
-      <img class="brand-logo brand-logo--padded" src="imagens/logo.blessed.png" alt="Blessed Choice">
-      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.eudora.jpg" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.maybe.png" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.pantene.png" alt="" aria-hidden="true">
+      <img class="brand-logo" src="imagens/logo.loreal.png" decoding="async" fetchpriority="low" alt="L'Oréal">
+      <img class="brand-logo brand-logo--tall" src="imagens/logo.ds.png" decoding="async" fetchpriority="low" alt="DS">
+      <img class="brand-logo brand-logo--tall" src="imagens/logo.cristina.png" decoding="async" fetchpriority="low" alt="Cristina">
+      <img class="brand-logo" src="imagens/logo.organ.jpg" decoding="async" fetchpriority="low" alt="Organ">
+      <img class="brand-logo brand-logo--wide" src="imagens/logo.garnier.png" decoding="async" fetchpriority="low" alt="Garnier">
+      <img class="brand-logo brand-logo--padded" src="imagens/logo.blessed.png" decoding="async" fetchpriority="low" alt="Blessed Choice">
+      <img class="brand-logo brand-logo--padded" src="imagens/logo.eudora-sem-fundo.png" decoding="async" fetchpriority="low" alt="Eudora">
+      <img class="brand-logo brand-logo--padded" src="imagens/logo.maybe-sem-fundo.png" decoding="async" fetchpriority="low" alt="Maybelline New York">
+      <img class="brand-logo brand-logo--padded" src="imagens/logo.pantene-sem-fundo.png" decoding="async" fetchpriority="low" alt="Pantene">
       <!-- Cópia da sequência para o loop contínuo (ignorada por leitores de tela) -->
-      <img class="brand-logo brand-logo--clone" src="imagens/logo.loreal.png" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--tall brand-logo--clone" src="imagens/logo.ds.png" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--tall brand-logo--clone" src="imagens/logo.cristina.png" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--clone" src="imagens/logo.organ.jpg" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--wide brand-logo--clone" src="imagens/logo.garnier.png" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.blessed.png" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.eudora.jpg" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.maybe.png" alt="" aria-hidden="true">
-      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.pantene.png" alt="" aria-hidden="true">
-    </div>
-  </div>
-</section>
-
-<!-- ============================================= -->
-<!-- 8. DEPOIMENTOS                                 -->
-<!-- ============================================= -->
-<section class="section" id="depoimentos">
-  <div class="container">
-    <span class="eyebrow reveal center">Quem já trabalhou comigo</span>
-    <h2 class="section-title center reveal">Depoimentos</h2>
-
-    <div class="testimonials-wrap reveal">
-      <div class="testimonials-track" id="testimonialsTrack">
-
-        <blockquote class="testimonial-card">
-          <p>”A Daniella entendeu o tom da nossa marca rapidinho. O vídeo que ela entregou virou nosso melhor criativo de anúncio do trimestre.”</p>
-          <footer>
-            <div class="ph ph-tone-1 testimonial-avatar" data-ph="avatar-1"></div>
-            <div>
-              <strong>Camila Reis</strong>
-              <span>Gerente de Marketing, Nova Fit</span>
-            </div>
-          </footer>
-        </blockquote>
-
-        <blockquote class="testimonial-card">
-          <p>“Processo extremamente organizado, do briefing à entrega. E o resultado pareceu conteúdo espontâneo, não publicidade.”</p>
-          <footer>
-            <div class="ph ph-tone-2 testimonial-avatar" data-ph="avatar-2"></div>
-            <div>
-              <strong>Rafael Nogueira</strong>
-              <span>Fundador, Vitta Supplements</span>
-            </div>
-          </footer>
-        </blockquote>
-
-        <blockquote class="testimonial-card">
-          <p>“Contratamos para um unboxing e o engajamento superou tudo que já tínhamos feito com influenciadores maiores.”</p>
-          <footer>
-            <div class="ph ph-tone-3 testimonial-avatar" data-ph="avatar-3"></div>
-            <div>
-              <strong>Juliana Prado</strong>
-              <span>Social Media, Lumière Skin</span>
-            </div>
-          </footer>
-        </blockquote>
-
-      </div>
-
-      <div class="testimonials-controls">
-        <button class="carousel-btn" id="testimonialPrev" aria-label="Depoimento anterior">←</button>
-        <div class="testimonials-dots" id="testimonialsDots"></div>
-        <button class="carousel-btn" id="testimonialNext" aria-label="Próximo depoimento">→</button>
-      </div>
+      <img class="brand-logo brand-logo--clone" src="imagens/logo.loreal.png" decoding="async" fetchpriority="low" alt="" aria-hidden="true">
+      <img class="brand-logo brand-logo--tall brand-logo--clone" src="imagens/logo.ds.png" decoding="async" fetchpriority="low" alt="" aria-hidden="true">
+      <img class="brand-logo brand-logo--tall brand-logo--clone" src="imagens/logo.cristina.png" decoding="async" fetchpriority="low" alt="" aria-hidden="true">
+      <img class="brand-logo brand-logo--clone" src="imagens/logo.organ.jpg" decoding="async" fetchpriority="low" alt="" aria-hidden="true">
+      <img class="brand-logo brand-logo--wide brand-logo--clone" src="imagens/logo.garnier.png" decoding="async" fetchpriority="low" alt="" aria-hidden="true">
+      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.blessed.png" decoding="async" fetchpriority="low" alt="" aria-hidden="true">
+      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.eudora-sem-fundo.png" decoding="async" fetchpriority="low" alt="" aria-hidden="true">
+      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.maybe-sem-fundo.png" decoding="async" fetchpriority="low" alt="" aria-hidden="true">
+      <img class="brand-logo brand-logo--padded brand-logo--clone" src="imagens/logo.pantene-sem-fundo.png" decoding="async" fetchpriority="low" alt="" aria-hidden="true">
     </div>
   </div>
 </section>
@@ -596,22 +549,22 @@
       <ul class="contact-links">
         <li>
           <a href="https://www.instagram.com/daniellabreup/" target="_blank" rel="noopener">
-            <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span> Instagram
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span> Instagram
           </a>
         </li>
         <li>
           <a href="https://www.tiktok.com/@daniella.paim" target="_blank" rel="noopener">
-            <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4v10.5a3.5 3.5 0 11-3.5-3.5"/><path d="M14 4c0 2.8 2.2 5 5 5"/></svg></span> TikTok
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4v10.5a3.5 3.5 0 11-3.5-3.5"/><path d="M14 4c0 2.8 2.2 5 5 5"/></svg></span> TikTok
           </a>
         </li>
         <li>
           <a href="https://wa.me/5551985919822" target="_blank" rel="noopener">
-            <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18l-1.4 3.4L8 20a8 8 0 104-1z"/><path d="M8.5 8.5c0 4 3 7 7 7 .6-1 .6-2-.4-2.4l-1.6-.7c-.5-.2-1 0-1.3.4l-.4.5c-1.4-.6-2.5-1.7-3.1-3.1l.5-.4c.4-.3.6-.8.4-1.3l-.7-1.6c-.4-1-1.4-1-2.4-.4z"/></svg></span> WhatsApp
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18l-1.4 3.4L8 20a8 8 0 104-1z"/><path d="M8.5 8.5c0 4 3 7 7 7 .6-1 .6-2-.4-2.4l-1.6-.7c-.5-.2-1 0-1.3.4l-.4.5c-1.4-.6-2.5-1.7-3.1-3.1l.5-.4c.4-.3.6-.8.4-1.3l-.7-1.6c-.4-1-1.4-1-2.4-.4z"/></svg></span> WhatsApp
           </a>
         </li>
         <li>
           <a href="mailto:ugc.creatordani@gmail.com">
-            <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></span> ugc.creatordani@gmail.com
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></span> ugc.creatordani@gmail.com
           </a>
         </li>
       </ul>
@@ -620,17 +573,17 @@
     <form class="contact-form reveal" id="contactForm" data-reveal-delay="120">
       <div class="form-row">
         <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+        <input type="text" id="nome" name="nome" autocomplete="name" required placeholder="Seu nome">
       </div>
 
       <div class="form-row">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" required placeholder="voce@marca.com">
+        <input type="email" id="email" name="email" autocomplete="email" required placeholder="voce@marca.com">
       </div>
 
       <div class="form-row">
         <label for="marca">Marca / Empresa</label>
-        <input type="text" id="marca" name="marca" required placeholder="Nome da marca">
+        <input type="text" id="marca" name="marca" autocomplete="organization" required placeholder="Nome da marca">
       </div>
 
       <div class="form-row">
@@ -653,7 +606,7 @@
       </div>
 
       <button type="submit" class="btn btn-primary btn-full">Enviar mensagem</button>
-      <p class="form-note" id="formNote"></p>
+      <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
     </form>
 
   </div>
@@ -662,7 +615,7 @@
 </main>
 
 <!-- ============================================= -->
-<!-- FOOTER                                         -->
+<!-- 13. FOOTER                                         -->
 <!-- ============================================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
@@ -677,7 +630,7 @@
   </div>
 </footer>
 
-<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+<button type="button" class="back-to-top" id="backToTop" aria-label="Voltar ao topo"><span aria-hidden="true">↑</span></button>
 
 <script src="script.js"></script>
 </body>
